@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DevDocs Toàn Thư – Song Ngữ (EN–VI)</title>
+<meta name="description" content="Tổng hợp tài liệu chính thức cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái liên quan. Song ngữ Anh–Việt.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #24292e;
+    --muted: #57606a;
+    --card: #f6f8fa;
+    --link: #0969da;
+    --border: #d0d7de;
+    --accent: #1f6feb;
+    --code: #0b0d0e;
+    --kbd-bg: #f6f8fa;
+    --kbd-fg: #24292e;
+    --shadow: rgba(27,31,35,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #c9d1d9;
+      --muted: #8b949e;
+      --card: #161b22;
+      --link: #58a6ff;
+      --border: #30363d;
+      --accent: #1f6feb;
+      --code: #c9d1d9;
+      --kbd-bg: #0d1117;
+      --kbd-fg: #c9d1d9;
+      --shadow: rgba(1,4,9,0.3);
+    }
+  }
+  /* Theme override via data-theme */
+  html[data-theme="light"] {
+    --bg: #ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --code:#0b0d0e; --kbd-bg:#f6f8fa; --kbd-fg:#24292e; --shadow: rgba(27,31,35,0.04);
+  }
+  html[data-theme="dark"] {
+    --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --code:#c9d1d9; --kbd-bg:#0d1117; --kbd-fg:#c9d1d9; --shadow: rgba(1,4,9,0.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  .title-row {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .logo {
+    width: 28px; height: 28px; border-radius: 6px; background: var(--accent);
+    box-shadow: 0 2px 8px var(--shadow); display: grid; place-items: center; color: white; font-weight: 700;
+  }
+  h1 { font-size: 20px; margin: 0; }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .toolbar {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px;
+  }
+  .search {
+    flex: 1 1 340px; display: flex; gap: 8px; align-items: center;
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
+  }
+  .search input {
+    flex: 1; border: none; outline: none; background: transparent; color: var(--fg);
+    font-size: 14px;
+  }
+  .btn, summary {
+    appearance: none; border: 1px solid var(--border); background: var(--card);
+    color: var(--fg); padding: 8px 10px; border-radius: 8px; font-size: 14px;
+    cursor: pointer;
+  }
+  .btn:hover, summary:hover { border-color: var(--muted); }
+  .chip {
+    border: 1px solid var(--border); background: transparent; color: var(--muted);
+    padding: 4px 8px; border-radius: 999px; font-size: 12px;
+  }
+  main { padding: 16px; }
+  details.group {
+    border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 14px; background: var(--card);
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+  details.group > summary {
+    user-select: none;
+    list-style: none; display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 12px 14px; font-weight: 600; background: transparent;
+  }
+  details.group[open] > summary { border-bottom: 1px solid var(--border); }
+  .group-title { display: flex; align-items: center; gap: 10px; }
+  .group-title .icon { font-size: 18px; }
+  .links {
+    padding: 12px 14px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 6px 16px;
+  }
+  .links a {
+    text-decoration: none; color: var(--link); padding: 6px 0;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .links small { color: var(--muted); }
+  .hint { color: var(--muted); font-size: 13px; }
+  footer {
+    border-top: 1px solid var(--border); padding: 16px; color: var(--muted);
+    text-align: center;
+  }
+  kbd {
+    background: var(--kbd-bg); color: var(--kbd-fg);
+    border: 1px solid var(--border); border-bottom-width: 2px;
+    border-radius: 6px; padding: 2px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 12px;
+  }
+  .controls-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .badge { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="title-row">
+      <div class="logo">DD</div>
+      <div>
+        <h1>DevDocs Toàn Thư – Song Ngữ (EN–VI)</h1>
+        <div class="subtitle">Tổng hợp tài liệu CHÍNH THỨC cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái. Phong cách GitHub. </div>
+      </div>
+      <div class="right">
+        <button id="themeBtn" class="btn" title="Đổi giao diện (Auto/Light/Dark)">Theme: <span id="themeState">Auto</span></button>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search">
+        <span>🔎</span>
+        <input id="searchInput" type="search" placeholder="Tìm tài liệu… (ví dụ: React, Flask, Spring Boot, LINQ, Gin, Tailwind) | Search docs…" />
+      </div>
+      <div class="controls-row">
+        <button class="btn" id="expandAll">Mở tất cả</button>
+        <button class="btn" id="collapseAll">Thu gọn tất cả</button>
+        <span class="chip">Mẹo: nhấn <kbd>/</kbd> để bật ô tìm kiếm</span>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="container" id="content">
+  <!-- React & Ecosystem -->
+  <details class="group" open>
+    <summary>
+      <div class="group-title"><span class="icon">⚛️</span><span>React & Ecosystem — <span class="hint">Hệ sinh thái React</span></span></div>
+      <span class="badge">EN + VI</span>
+    </summary>
+    <div class="links">
+      <a href="https://react.dev" target="_blank">React – Official Docs <small>(EN)</small></a>
+      <a href="https://legacy.reactjs.org" target="_blank">React – Legacy Docs <small>(EN, có bản dịch một phần)</small></a>
+      <a href="https://vi.reactjs.org/" target="_blank">React – Tài liệu tiếng Việt <small>(nếu còn bản dịch)</small></a>
+      <a href="https://nextjs.org/docs" target="_blank">Next.js – Docs <small>(EN)</small></a>
+      <a href="https://redux-toolkit.js.org" target="_blank">Redux Toolkit – Docs <small>(EN)</small></a>
+      <a href="https://reactrouter.com/en/main" target="_blank">React Router – Docs <small>(EN)</small></a>
+      <a href="https://tanstack.com/query/latest/docs/react" target="_blank">TanStack Query (React Query) – Docs <small>(EN)</small></a>
+      <a href="https://www.typescriptlang.org/docs/" target="_blank">TypeScript – Docs <small>(EN)</small></a>
+      <a href="https://vitejs.dev/guide/" target="_blank">Vite – Guide <small>(EN)</small></a>
+      <a href="https://babeljs.io/docs/" target="_blank">Babel – Docs <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- Tailwind & UI Frameworks -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🎨</span><span>Tailwind & UI Frameworks — <span class="hint">Thư viện giao diện</span></span></div>
+      <span class="badge">EN + VI</span>
+    </summary>
+    <div class="links">
+      <a href="https://tailwindcss.com/docs" target="_blank">Tailwind CSS – Docs <small>(EN)</small></a>
+      <a href="https://v1.tailwindcss.vn/docs" target="_blank">Tailwind CSS – Tài liệu tiếng Việt <small>(VI, bản dịch community)</small></a>
+      <a href="https://ui.shadcn.com" target="_blank">shadcn/ui – Docs <small>(EN)</small></a>
+      <a href="https://daisyui.com/components/" target="_blank">daisyUI – Components <small>(EN)</small></a>
+      <a href="https://flowbite.com/docs/" target="_blank">Flowbite – Docs <small>(EN)</small></a>
+      <a href="https://headlessui.com" target="_blank">Headless UI – Docs <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- Python & Data Science -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🐍</span><span>Python & Data Science — <span class="hint">Ngôn ngữ & ML</span></span></div>
+      <span class="badge">EN + VI</span>
+    </summary>
+    <div class="links">
+      <a href="https://docs.python.org/3/" target="_blank">Python – Official Docs <small>(EN)</small></a>
+      <a href="https://docs.python.org/vi/3/" target="_blank">Python – Tài liệu tiếng Việt <small>(VI)</small></a>
+      <a href="https://pypi.org/" target="_blank">PyPI – Python Package Index <small>(EN)</small></a>
+      <a href="https://numpy.org/doc/" target="_blank">NumPy – Docs <small>(EN)</small></a>
+      <a href="https://pandas.pydata.org/docs/" target="_blank">Pandas – Docs <small>(EN)</small></a>
+      <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn – Docs <small>(EN)</small></a>
+      <a href="https://matplotlib.org/stable/contents.html" target="_blank">Matplotlib – Docs <small>(EN)</small></a>
+      <a href="https://flask.palletsprojects.com/en/stable/" target="_blank">Flask – Docs <small>(EN)</small></a>
+      <a href="https://docs.djangoproject.com/en/stable/" target="_blank">Django – Docs <small>(EN)</small></a>
+      <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI – Docs <small>(EN)</small></a>
+      <a href="https://docs.python-guide.org/" target="_blank">The Hitchhiker’s Guide to Python <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- C# & .NET -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🧱</span><span>C# & .NET Platform — <span class="hint">Nền tảng .NET</span></span></div>
+      <span class="badge">EN</span>
+    </summary>
+    <div class="links">
+      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank">C# – Microsoft Learn <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/dotnet/api/" target="_blank">.NET – API Reference <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/aspnet/core" target="_blank">ASP.NET Core – Docs <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/ef/core/" target="_blank">Entity Framework Core – Docs <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/" target="_blank">WinForms – Docs <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/" target="_blank">Blazor – Docs <small>(EN)</small></a>
+      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/" target="_blank">LINQ – Docs <small>(EN)</small></a>
+      <a href="https://www.nuget.org/" target="_blank">NuGet – Packages <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- Java & Spring -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">☕</span><span>Java & Spring — <span class="hint">Hệ sinh thái Java</span></span></div>
+      <span class="badge">EN</span>
+    </summary>
+    <div class="links">
+      <a href="https://docs.oracle.com/en/java/javase/" target="_blank">Java SE – Docs <small>(EN)</small></a>
+      <a href="https://docs.oracle.com/javase/tutorial/" target="_blank">The Java Tutorials <small>(EN)</small></a>
+      <a href="https://docs.spring.io/spring-framework/reference/" target="_blank">Spring Framework – Reference <small>(EN)</small></a>
+      <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/" target="_blank">Spring Boot – Reference <small>(EN)</small></a>
+      <a href="https://hibernate.org/orm/documentation/" target="_blank">Hibernate ORM – Docs <small>(EN)</small></a>
+      <a href="https://maven.apache.org/guides/" target="_blank">Maven – Guides <small>(EN)</small></a>
+      <a href="https://docs.gradle.org/current/userguide/userguide.html" target="_blank">Gradle – User Guide <small>(EN)</small></a>
+      <a href="https://openjfx.io/javadoc/" target="_blank">JavaFX – Javadoc <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- Go (Golang) -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🐹</span><span>Go (Golang) — <span class="hint">Ngôn ngữ & thư viện</span></span></div>
+      <span class="badge">EN</span>
+    </summary>
+    <div class="links">
+      <a href="https://go.dev/doc/" target="_blank">Go – Official Docs <small>(EN)</small></a>
+      <a href="https://pkg.go.dev/std" target="_blank">Go – Standard Library API <small>(EN)</small></a>
+      <a href="https://go.dev/doc/effective_go" target="_blank">Effective Go <small>(EN)</small></a>
+      <a href="https://gin-gonic.com/docs/" target="_blank">Gin – Docs <small>(EN)</small></a>
+      <a href="https://gorm.io/docs/" target="_blank">GORM – Docs <small>(EN)</small></a>
+      <a href="https://cobra.dev/" target="_blank">Cobra – CLI Framework Docs <small>(EN)</small></a>
+      <a href="https://pkg.go.dev/github.com/spf13/viper" target="_blank">Viper – Config Docs <small>(EN)</small></a>
+      <a href="https://gobyexample.com/" target="_blank">Go by Example <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- HTML / CSS / Web APIs -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🌐</span><span>HTML / CSS / Web APIs — <span class="hint">Chuẩn & Tài liệu</span></span></div>
+      <span class="badge">EN + VI</span>
+    </summary>
+    <div class="links">
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN – HTML <small>(EN)</small></a>
+      <a href="https://developer.mozilla.org/vi/docs/Web/HTML" target="_blank">MDN – HTML <small>(VI)</small></a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN – CSS <small>(EN)</small></a>
+      <a href="https://developer.mozilla.org/vi/docs/Web/CSS" target="_blank">MDN – CSS <small>(VI)</small></a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN – JavaScript <small>(EN)</small></a>
+      <a href="https://developer.mozilla.org/vi/docs/Web/JavaScript" target="_blank">MDN – JavaScript <small>(VI)</small></a>
+      <a href="https://html.spec.whatwg.org/" target="_blank">WHATWG – HTML Living Standard <small>(EN)</small></a>
+      <a href="https://www.w3.org/Style/CSS/specs.en.html" target="_blank">W3C – CSS Specifications <small>(EN)</small></a>
+      <a href="https://caniuse.com/" target="_blank">Can I Use – Browser Support <small>(EN)</small></a>
+      <a href="https://fetch.spec.whatwg.org/" target="_blank">WHATWG – Fetch Standard <small>(EN)</small></a>
+      <a href="https://tc39.es/ecma262/" target="_blank">ECMAScript (TC39) – Language Spec <small>(EN)</small></a>
+    </div>
+  </details>
+
+  <!-- Tools & Dev Utilities -->
+  <details class="group">
+    <summary>
+      <div class="group-title"><span class="icon">🧩</span><span>Tools & Dev Utilities — <span class="hint">Công cụ phát triển</span></span></div>
+      <span class="badge">EN</span>
+    </summary>
+    <div class="links">
+      <a href="https://git-scm.com/docs" target="_blank">Git – Documentation <small>(EN)</small></a>
+      <a href="https://docs.github.com/en" target="_blank">GitHub – Docs <small>(EN)</small></a>
+      <a href="https://nodejs.org/en/docs" target="_blank">Node.js – Docs <small>(EN)</small></a>
+      <a href="https://pnpm.io/motivation" target="_blank">pnpm – Docs <small>(EN)</small></a>
+      <a href="https://yarnpkg.com/getting-started" target="_blank">Yarn – Docs <small>(EN)</small></a>
+      <a href="https://eslint.org/docs/latest/" target="_blank">ESLint – Docs <small>(EN)</small></a>
+      <a href="https://prettier.io/docs/en/" target="_blank">Prettier – Docs <small>(EN)</small></a>
+      <a href="https://webpack.js.org/concepts/" target="_blank">Webpack – Concepts <small>(EN)</small></a>
+      <a href="https://rollupjs.org/introduction/" target="_blank">Rollup – Docs <small>(EN)</small></a>
+      <a href="https://vitejs.dev/guide/" target="_blank">Vite – Guide <small>(EN)</small></a>
+    </div>
+  </details>
+</main>
+<footer>
+  Cập nhật: 2025-10-08 20:29:26. • Giao diện kiểu GitHub • Chế độ Auto/Light/Dark • Tìm kiếm realtime • Thu gọn / Mở rộng nhóm.
+</footer>
+
+<script>
+(function() {
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const themeState = document.getElementById('themeState');
+  const searchInput = document.getElementById('searchInput');
+  const expandAllBtn = document.getElementById('expandAll');
+  const collapseAllBtn = document.getElementById('collapseAll');
+  const groups = Array.from(document.querySelectorAll('details.group'));
+  const LINKS_SELECTOR = '.links a';
+
+  const THEME_KEY = 'devdocs_theme_mode'; // 'auto' | 'light' | 'dark'
+  const STATE = {
+    mode: localStorage.getItem(THEME_KEY) || 'auto'
+  };
+
+  function applyTheme() {
+    if (STATE.mode === 'auto') {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', STATE.mode);
+    }
+    themeState.textContent = STATE.mode.charAt(0).toUpperCase() + STATE.mode.slice(1);
+    localStorage.setItem(THEME_KEY, STATE.mode);
+  }
+
+  function cycleTheme() {
+    STATE.mode = STATE.mode === 'auto' ? 'light' : STATE.mode === 'light' ? 'dark' : 'auto';
+    applyTheme();
+  }
+
+  themeBtn.addEventListener('click', cycleTheme);
+  applyTheme();
+
+  // Search filter (realtime)
+  function normalize(str) {
+    return (str || '').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // remove accents
+  }
+
+  function performSearch(q) {
+    const needle = normalize(q);
+    const allLinks = Array.from(document.querySelectorAll(LINKS_SELECTOR));
+    let matchCount = 0;
+    allLinks.forEach(a => {
+      const hay = normalize(a.textContent + ' ' + a.getAttribute('href'));
+      const hit = !needle || hay.includes(needle);
+      a.classList.toggle('hidden', !hit);
+      if (hit) matchCount++;
+    });
+    // Auto open groups with matches; close groups with none (only when searching)
+    if (needle) {
+      groups.forEach(g => {
+        const anyVisible = Array.from(g.querySelectorAll(LINKS_SELECTOR)).some(x => !x.classList.contains('hidden'));
+        g.open = anyVisible;
+      });
+    }
+    return matchCount;
+  }
+
+  searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/') {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+
+  // Expand / Collapse
+  expandAllBtn.addEventListener('click', () => { groups.forEach(g => g.open = true); });
+  collapseAllBtn.addEventListener('click', () => { groups.forEach(g => g.open = false); });
+
+  // Initial state
+  performSearch('');
+
+})();
+</script>
+</body>
+</html>

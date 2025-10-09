@@ -3,70 +3,160 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DevDocs Portal — EN–VI</title>
-<meta name="description" content="Cổng tri thức lập trình song ngữ, tổng hợp tài liệu chính thức cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái.">
+<title>DevDocs Portal — EN–VI (v3)</title>
+<meta name="description" content="Cổng tri thức lập trình song ngữ, VS Code-style, PWA offline.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Crect width='100%25' height='100%25' rx='24' ry='24' fill='%231f6feb'/%3E%3Ctext x='50%25' y='57%25' text-anchor='middle' font-family='Inter, Arial' font-size='70' fill='white'%3EDD%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#1f6feb"/>
+
 <style>
-  /* ---------- Base Tokens (GitHub Light/Dark) ---------- */
+  /* ===== THEME TOKENS ===== */
   :root{
-    --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.06);
-    --danger:#dc2626; --warn:#d97706; --ok:#16a34a;
-    --code-bg:#f6f8fa; --code-fg:#24292e;
+    --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.08);
+    --danger:#dc2626; --warn:#d97706; --ok:#16a34a; --glass:rgba(246,248,250,0.75);
+    --code-bg:#f6f8fa; --code-fg:#24292e; --sidebar:#f3f4f6; --sidebar-border:#e5e7eb;
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35);
-      --danger:#ef4444; --warn:#f59e0b; --ok:#22c55e;
-      --code-bg:#0d1117; --code-fg:#c9d1d9;
+      --danger:#ef4444; --warn:#f59e0b; --ok:#22c55e; --glass:rgba(13,17,23,0.55);
+      --code-bg:#0d1117; --code-fg:#c9d1d9; --sidebar:#0f141b; --sidebar-border:#22272e;
     }
   }
-  /* Theme overrides */
-  html[data-theme="light"]{ --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.06); --code-bg:#f6f8fa; --code-fg:#24292e;}
-  html[data-theme="dark"]{ --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35); --code-bg:#0d1117; --code-fg:#c9d1d9;}
-  html[data-theme="vscode"]{ --bg:#0e1114; --fg:#d4d4d4; --muted:#9da3ae; --card:#11151a; --link:#4fc1ff; --border:#2a2f36; --accent:#3ea6ff; --shadow:rgba(0,0,0,0.35); --code-bg:#0b0f14; --code-fg:#d4d4d4;}
-  html[data-theme="hacker"]{ --bg:#050505; --fg:#d0ffd0; --muted:#80c080; --card:#0a0f0a; --link:#00ff99; --border:#113311; --accent:#00e676; --shadow:rgba(0,255,153,0.15); --code-bg:#0a0f0a; --code-fg:#d0ffd0;}
-  html[data-theme="solarized"]{ --bg:#fdf6e3; --fg:#073642; --muted:#657b83; --card:#eee8d5; --link:#268bd2; --border:#d3c6a6; --accent:#2aa198; --shadow:rgba(0,0,0,0.08); --code-bg:#eee8d5; --code-fg:#073642;}
-  html[data-theme="monokai"]{ --bg:#272822; --fg:#f8f8f2; --muted:#a6e22e; --card:#2d2e28; --link:#66d9ef; --border:#3c3d36; --accent:#fd971f; --shadow:rgba(0,0,0,0.4); --code-bg:#2d2e28; --code-fg:#f8f8f2;}
 
+  html[data-theme="light"]{ --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.08); --glass:rgba(246,248,250,0.75); --code-bg:#f6f8fa; --code-fg:#24292e; --sidebar:#f3f4f6; --sidebar-border:#e5e7eb;}
+  html[data-theme="dark"]{ --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35); --glass:rgba(13,17,23,0.55); --code-bg:#0d1117; --code-fg:#c9d1d9; --sidebar:#0f141b; --sidebar-border:#22272e;}
+  html[data-theme="vscode"]{ --bg:#0e1114; --fg:#d4d4d4; --muted:#9da3ae; --card:#11151a; --link:#4fc1ff; --border:#2a2f36; --accent:#3ea6ff; --shadow:rgba(0,0,0,0.35); --glass:rgba(17,21,26,0.55); --code-bg:#0b0f14; --code-fg:#d4d4d4; --sidebar:#0c1015; --sidebar-border:#20242a;}
+  html[data-theme="hacker"]{ --bg:#050505; --fg:#d0ffd0; --muted:#80c080; --card:#0a0f0a; --link:#00ff99; --border:#113311; --accent:#00e676; --shadow:rgba(0,255,153,0.15); --glass:rgba(10,15,10,0.55); --code-bg:#0a0f0a; --code-fg:#d0ffd0; --sidebar:#070d07; --sidebar-border:#0e1d0e;}
+  html[data-theme="solarized"]{ --bg:#fdf6e3; --fg:#073642; --muted:#657b83; --card:#eee8d5; --link:#268bd2; --border:#d3c6a6; --accent:#2aa198; --shadow:rgba(0,0,0,0.08); --glass:rgba(253,246,227,0.7); --code-bg:#eee8d5; --code-fg:#073642; --sidebar:#f3ecd3; --sidebar-border:#e3d7b3;}
+  html[data-theme="monokai"]{ --bg:#272822; --fg:#f8f8f2; --muted:#a6e22e; --card:#2d2e28; --link:#66d9ef; --border:#3c3d36; --accent:#fd971f; --shadow:rgba(0,0,0,0.4); --glass:rgba(39,40,34,0.65); --code-bg:#2d2e28; --code-fg:#f8f8f2; --sidebar:#22231e; --sidebar-border:#35362f;}
+
+  /* New themes */
+  html[data-theme="dracula"]{ --bg:#282a36; --fg:#f8f8f2; --muted:#bd93f9; --card:#2f3241; --link:#8be9fd; --border:#3b3e4c; --accent:#ff79c6; --shadow:rgba(0,0,0,0.45); --glass:rgba(40,42,54,0.6); --code-bg:#2f3241; --code-fg:#f8f8f2; --sidebar:#222433; --sidebar-border:#34364a;}
+  html[data-theme="nord"]{ --bg:#2e3440; --fg:#eceff4; --muted:#81a1c1; --card:#3b4252; --link:#88c0d0; --border:#434c5e; --accent:#5e81ac; --shadow:rgba(0,0,0,0.45); --glass:rgba(46,52,64,0.6); --code-bg:#3b4252; --code-fg:#eceff4; --sidebar:#2b303b; --sidebar-border:#3b4252;}
+
+  /* ===== BASE ===== */
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,ui-sans-serif,System-ui,Segoe UI,Roboto,Arial;line-height:1.6}
-  a{color:var(--link);text-decoration:none}
-  header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border)}
-  .container{max-width:1220px;margin:0 auto;padding:14px 16px}
-  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  .logo{width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:0 2px 10px var(--shadow)}
-  h1{font-size:20px;margin:0}
-  .subtitle{color:var(--muted);font-size:13px}
-  .grow{flex:1}
-  .btn, .select, summary{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--fg);padding:8px 10px;border-radius:8px;font-size:14px;cursor:pointer}
-  .btn:hover, summary:hover{border-color:var(--muted)}
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-  .search{flex:1 1 360px;display:flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
-  .search input{flex:1;border:none;outline:none;background:transparent;color:var(--fg);font-size:14px}
-  .chip{border:1px solid var(--border);color:var(--muted);padding:4px 8px;border-radius:999px;font-size:12px}
-  main{display:flex;gap:12px;padding:14px 16px}
-  .left{flex: 1 1 720px;min-width: 320px}
-  .right{flex: 1 1 480px;min-width: 280px;display:flex;flex-direction:column;gap:12px}
-  .panel{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 8px var(--shadow)}
-  .panel h3{margin:0;padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px}
-  .panel-body{padding:10px 12px}
-  details.group{border:1px solid var(--border);border-radius:10px;margin-bottom:12px;background:var(--card);box-shadow:0 2px 6px var(--shadow)}
-  details.group > summary{user-select:none;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;font-weight:600}
-  details.group[open] > summary{border-bottom:1px solid var(--border)}
-  .gtitle{display:flex;align-items:center;gap:10px}
-  .badge{border:1px solid var(--border);border-radius:6px;padding:2px 6px;color:var(--muted);font-size:12px}
-  .links{padding:12px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 16px}
-  .item{display:flex;align-items:center;gap:8px;padding:6px 0}
-  .star{cursor:pointer;opacity:.6}
-  .star.active{color:#f59e0b;opacity:1}
-  .meta{color:var(--muted);font-size:12px}
-  .tooltip{position:fixed;z-index:50;pointer-events:none;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-size:12px;box-shadow:0 6px 20px var(--shadow);max-width:320px;display:none}
-  iframe{width:100%;height:60vh;border:none;border-top:1px solid var(--border)}
-  .note-area{width:100%;min-height:120px;background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:ui-monospace,Consolas,Menlo,monospace}
-  .stats{display:flex;flex-wrap:wrap;gap:8px}
-  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px}
-  .hidden{display:none!important}
-  @media (max-width: 980px){ main{flex-direction:column} .right{order:-1} }
-  @media print{ header, .toolbar, .right, .star, .controls-row{ display:none !important } details.group{border:none;box-shadow:none} body{background:#fff;color:#000} }
+  html, body { height:100% }
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family: Inter, ui-sans-serif, System-ui, Segoe UI, Roboto, Arial;
+    line-height:1.65;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  a{ color:var(--link); text-decoration:none; transition: color .2s ease }
+  .btn,.select{
+    appearance:none; border:1px solid var(--border); background:var(--card); color:var(--fg);
+    padding:8px 10px; border-radius:10px; font-size:14px; cursor:pointer; transition:border-color .2s ease, transform .08s ease;
+  }
+  .btn:hover,.select:hover{ border-color:var(--muted) }
+  .btn:active{ transform:translateY(1px) }
+  .chip{ border:1px solid var(--border); color:var(--muted); padding:4px 8px; border-radius:999px; font-size:12px }
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky; top:0; z-index:40; background:var(--glass);
+    border-bottom:1px solid var(--border); backdrop-filter: blur(8px);
+  }
+  .container{ max-width:1240px; margin:0 auto; padding:12px 16px }
+  .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+  .logo{ width:32px; height:32px; border-radius:8px; background:var(--accent); color:#fff; display:grid; place-items:center; font-weight:800; box-shadow:0 2px 10px var(--shadow) }
+  h1{ font-size:20px; margin:0 } .subtitle{ color:var(--muted); font-size:13px }
+
+  .toolbar{
+    display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
+    background: var(--glass); border:1px solid var(--border); border-radius:12px;
+    padding:10px; backdrop-filter: blur(8px);
+  }
+  .search{ flex:1 1 380px; display:flex; gap:8px; align-items:center;
+    background:var(--card); border:1px solid var(--border); border-radius:10px; padding:8px 10px }
+  .search input{ flex:1; border:none; outline:none; background:transparent; color:var(--fg); font-size:14px }
+
+  /* ===== LAYOUT: SIDEBAR + MAIN ===== */
+  .app{ display:grid; grid-template-columns: 260px 1fr 420px; gap:12px; padding:14px 16px }
+  .sidebar{
+    background:var(--sidebar); border:1px solid var(--sidebar-border); border-radius:12px; box-shadow:0 4px 16px var(--shadow);
+    padding:10px; position:sticky; top:92px; height: calc(100vh - 110px); overflow:auto;
+  }
+  .main{ min-width: 320px }
+  .right{ min-width: 300px; display:flex; flex-direction:column; gap:12px }
+
+  .s-title{ font-size:13px; color:var(--muted); margin:6px 8px }
+  .group-btn{
+    width:100%; text-align:left; background:transparent; border:1px solid transparent; border-radius:8px;
+    padding:8px 10px; display:flex; align-items:center; gap:8px; color:var(--fg); cursor:pointer;
+  }
+  .group-btn.active, .group-btn:hover{ background:var(--card); border-color:var(--border) }
+
+  .panel{ background:var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:0 4px 16px var(--shadow) }
+  .panel h3{ margin:0; padding:10px 12px; border-bottom:1px solid var(--border); font-size:14px }
+  .panel-body{ padding:12px 14px }
+
+  details.group{
+    border:1px solid var(--border); border-radius:12px; margin-bottom:12px; background:var(--card); box-shadow:0 3px 12px var(--shadow);
+    overflow:hidden; transition: box-shadow .25s ease;
+  }
+  details.group>summary{
+    list-style:none; user-select:none; padding:12px 14px; cursor:pointer; font-weight:600; display:flex; align-items:center; justify-content:space-between;
+  }
+  details[open]>.accordion{ max-height:800px; opacity:1 }
+  .accordion{ max-height:0; opacity:0; overflow:hidden; transition:max-height .35s ease, opacity .25s ease }
+  .links{ padding:10px 14px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:6px 16px }
+
+  .item{ display:flex; align-items:center; gap:8px; padding:6px 0 }
+  .item img.favico{ width:16px; height:16px; border-radius:4px; border:1px solid var(--border); background:var(--bg) }
+  .meta{ color:var(--muted); font-size:12px }
+
+  .star{ cursor:pointer; opacity:.7; transition: transform .08s ease, opacity .2s ease }
+  .star:hover{ opacity:1; transform: scale(1.05) }
+  .star.active{ color:#f59e0b }
+
+  .tooltip{ position:fixed; z-index:70; pointer-events:none; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:8px 10px; color:var(--fg); font-size:12px; box-shadow:0 8px 30px var(--shadow); max-width:320px; display:none }
+
+  /* Preview */
+  .preview-wrap{ position:relative }
+  iframe{ width:100%; height:60vh; border:none; border-top:1px solid var(--border) }
+  .spinner{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; background:linear-gradient(to bottom, transparent, rgba(0,0,0,.06)) }
+  .spinner::after{ content:""; width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:999px; animation:spin 1s linear infinite }
+  @keyframes spin { to { transform: rotate(360deg) } }
+
+  .note-area{ width:100%; min-height:140px; background:var(--bg); color:var(--fg); border:1px solid var(--border); border-radius:10px; padding:10px; font-family: ui-monospace, Consolas, Menlo, monospace }
+
+  .stats{ display:flex; flex-wrap:wrap; gap:8px }
+  .stat{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:8px 10px; font-size:12px }
+
+  /* Zen floating button */
+  #zenBtn{
+    position: fixed; right: 12px; bottom: 12px; z-index: 100;
+    background: var(--accent); color:white; border:none; box-shadow:0 4px 16px var(--shadow);
+  }
+  body.zen header, body.zen .toolbar, body.zen .right{ display:none !important }
+  body.zen .app{ grid-template-columns: 260px 1fr; }
+  body.zen #zenBtn{ background: var(--warn) }
+
+  /* Command Palette */
+  .cmdp{
+    position: fixed; inset:0; display:none; align-items:flex-start; justify-content:center; padding-top:10vh; z-index:90;
+    background: rgba(0,0,0,.35);
+  }
+  .cmdp .box{
+    width: min(780px, 94vw); background: var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:0 12px 36px var(--shadow);
+  }
+  .cmdp .top{ display:flex; gap:8px; align-items:center; padding:10px 12px; border-bottom:1px solid var(--border) }
+  .cmdp input{ flex:1; border:none; outline:none; background:transparent; color:var(--fg); font-size:16px }
+  .cmdp .list{ max-height: 50vh; overflow:auto }
+  .cmdp .row{ padding:10px 12px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; cursor:pointer }
+  .cmdp .row:hover{ background: var(--glass) }
+  .hidden{ display:none !important }
+
+  /* Responsive */
+  @media (max-width: 1100px){ .app{ grid-template-columns: 220px 1fr } }
+  @media (max-width: 900px){ .right{ display:none } .app{ grid-template-columns: 220px 1fr } }
+
+  @media print{
+    header, .toolbar, .right, .star, .cmdp, #zenBtn { display:none !important }
+    details.group{ border:none; box-shadow:none }
+    body{ background:#fff; color:#000 }
+  }
 </style>
 </head>
 <body>
@@ -76,22 +166,33 @@
       <div class="logo">DD</div>
       <div class="grow">
         <h1>DevDocs Portal — Song Ngữ (EN–VI)</h1>
-        <div class="subtitle">Cổng tài liệu chính thức: React, Tailwind, Python, C#, Java, Go, HTML/CSS & hệ sinh thái. Phong cách GitHub. Cập nhật: 2025-10-09 06:40:24</div>
+        <div class="subtitle">VS Code-style • PWA offline • Cập nhật: <span id="today"></span></div>
       </div>
-      <div>
-        <select id="themeSelect" class="select" title="Chủ đề giao diện">
-          <option value="auto">Theme: Auto</option>
+      <div class="row">
+        <select id="themeSelect" class="select" title="Chủ đề">
+          <option value="auto">Auto</option>
           <option value="light">Light</option>
           <option value="dark">Dark</option>
-          <option value="vscode">VS Code Blue</option>
-          <option value="hacker">Hacker Neon</option>
+          <option value="vscode">VS Code</option>
+          <option value="hacker">Hacker</option>
           <option value="solarized">Solarized</option>
           <option value="monokai">Monokai</option>
+          <option value="dracula">Dracula</option>
+          <option value="nord">Nord</option>
         </select>
+        <div id="swatches" class="row" style="gap:6px">
+          <button class="btn" data-theme="light" title="Light" style="padding:0;width:22px;height:22px;border-radius:6px;background:#fff;border-color:#d0d7de"></button>
+          <button class="btn" data-theme="dark" title="Dark" style="padding:0;width:22px;height:22px;border-radius:6px;background:#0d1117;border-color:#30363d"></button>
+          <button class="btn" data-theme="vscode" title="VS Code" style="padding:0;width:22px;height:22px;border-radius:6px;background:#0e1114;border-color:#2a2f36"></button>
+          <button class="btn" data-theme="dracula" title="Dracula" style="padding:0;width:22px;height:22px;border-radius:6px;background:#282a36;border-color:#3b3e4c"></button>
+          <button class="btn" data-theme="nord" title="Nord" style="padding:0;width:22px;height:22px;border-radius:6px;background:#2e3440;border-color:#3b4252"></button>
+          <button class="btn" data-theme="hacker" title="Hacker" style="padding:0;width:22px;height:22px;border-radius:6px;background:#050;border-color:#113311"></button>
+        </div>
+        <button id="zenBtn" class="btn" title="Zen Mode (Alt+Z)">🧘 Zen</button>
       </div>
     </div>
 
-    <div class="toolbar">
+    <div class="toolbar" id="toolbar">
       <div class="search">
         <span>🔎</span>
         <input id="searchInput" type="search" list="suggestList" placeholder="Tìm tài liệu… / Search docs…" />
@@ -113,33 +214,46 @@
         <option value="guide">Guide</option>
       </select>
       <button id="expandAll" class="btn">Mở tất cả</button>
-      <button id="collapseAll" class="btn">Thu gọn tất cả</button>
-      <button id="printBtn" class="btn" title="In ra PDF (dùng Print to PDF của trình duyệt)">In / PDF</button>
+      <button id="collapseAll" class="btn">Thu gọn</button>
+      <button id="printBtn" class="btn">In / PDF</button>
       <button id="exportJson" class="btn">Export JSON</button>
       <button id="exportMd" class="btn">Export Markdown</button>
       <label class="btn"><input id="importJson" type="file" accept="application/json" class="hidden">Import JSON</label>
-      <span class="chip">Phím tắt: <kbd>/</kbd> tìm kiếm • <kbd>Shift</kbd>+<kbd>O</kbd> xem trong panel</span>
+      <button id="exportNotes" class="btn">Export Notes</button>
+      <label class="btn"><input id="importNotes" type="file" accept="application/json" class="hidden">Import Notes</label>
+      <span class="chip">Phím tắt: <kbd>/</kbd> tìm • <kbd>⌘/Ctrl</kbd>+<kbd>K</kbd> Command • <kbd>Shift</kbd>+<kbd>O</kbd> Preview • <kbd>Alt</kbd>+<kbd>Z</kbd> Zen</span>
     </div>
   </div>
 </header>
 
-<main class="container">
-  <section class="left">
+<div class="app container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="s-title">Nhóm tài liệu</div>
+    <div id="sidebarGroups"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
     <div class="panel stats">
-      <div class="stat" id="stat-total">Tổng link: 0</div>
-      <div class="stat" id="stat-en">EN: 0</div>
-      <div class="stat" id="stat-vi">VI: 0</div>
-      <div class="stat" id="stat-fav">⭐ Favorites: 0</div>
+      <div class="panel-body stats">
+        <div class="stat" id="stat-total">Tổng link: 0</div>
+        <div class="stat" id="stat-en">EN: 0</div>
+        <div class="stat" id="stat-vi">VI: 0</div>
+        <div class="stat" id="stat-fav">⭐ Favorites: 0</div>
+      </div>
     </div>
 
     <div id="groups"></div>
-  </section>
+  </main>
 
+  <!-- RIGHT PANEL -->
   <aside class="right">
     <div class="panel">
       <h3>📄 Xem trước tài liệu (Preview)</h3>
-      <div class="panel-body">
+      <div class="panel-body preview-wrap">
         <label><input type="checkbox" id="previewToggle"> Mở link trong khung xem trước (iframe)</label>
+        <div class="spinner" id="spinner"></div>
         <iframe id="previewFrame" class="hidden"></iframe>
       </div>
     </div>
@@ -156,19 +270,36 @@
       </div>
     </div>
   </aside>
-</main>
+</div>
+
+<!-- COMMAND PALETTE -->
+<div class="cmdp" id="cmdp">
+  <div class="box">
+    <div class="top">
+      <span>⌘K</span>
+      <input id="cmdpInput" placeholder="Nhập để tìm & mở tài liệu…" />
+      <button id="cmdpClose" class="btn">Đóng</button>
+    </div>
+    <div class="list" id="cmdpList"></div>
+  </div>
+</div>
 
 <div class="tooltip" id="tooltip"></div>
 
 <script>
 (function(){
-  const TODAY = "2025-10-09 06:40:24";
-  const THEME_KEY = "devdocs.theme";
-  const FAV_KEY = "devdocs.favs";
-  const NOTES_KEY = "devdocs.notes";
-  const DATA_KEY = "devdocs.index"; // allow import/merge later
+  const TODAY = new Date().toLocaleString();
+  document.getElementById('today').textContent = TODAY;
 
+  /* ===== KEYS ===== */
+  const THEME_KEY="devdocs.theme", FAV_KEY="devdocs.favs", NOTES_KEY="devdocs.notes",
+        DATA_KEY="devdocs.index", SCROLL_KEY="devdocs.scrollTop", OPEN_KEY="devdocs.openGroups",
+        ZEN_KEY="devdocs.zen";
+
+  /* ===== ELEMENTS ===== */
+  const html = document.documentElement;
   const themeSelect = document.getElementById('themeSelect');
+  const swatches = document.getElementById('swatches');
   const searchInput = document.getElementById('searchInput');
   const suggestList = document.getElementById('suggestList');
   const groupFilter = document.getElementById('groupFilter');
@@ -179,21 +310,31 @@
   const exportJsonBtn = document.getElementById('exportJson');
   const exportMdBtn = document.getElementById('exportMd');
   const importJsonInput = document.getElementById('importJson');
+  const exportNotesBtn = document.getElementById('exportNotes');
+  const importNotesInput = document.getElementById('importNotes');
   const groupsRoot = document.getElementById('groups');
+  const sidebarGroups = document.getElementById('sidebarGroups');
   const statTotal = document.getElementById('stat-total');
   const statEN = document.getElementById('stat-en');
   const statVI = document.getElementById('stat-vi');
   const statFav = document.getElementById('stat-fav');
-  const previewToggle = document.getElementById('previewToggle');
+
+  const previewToggleEl = document.getElementById('previewToggle');
   const previewFrame = document.getElementById('previewFrame');
+  const spinner = document.getElementById('spinner');
   const tooltip = document.getElementById('tooltip');
   const noteArea = document.getElementById('noteArea');
   const noteLink = document.getElementById('noteLink');
   const saveNoteBtn = document.getElementById('saveNote');
   const delNoteBtn = document.getElementById('delNote');
+  const zenBtn = document.getElementById('zenBtn');
 
-  /* ---------- Data: groups and items ---------- */
-  // Each item: { t: "Title", url, lang: "EN|VI", type: "official|framework|library|tool|spec|api|guide", desc, tags:[...], group:"React" }
+  const cmdp = document.getElementById('cmdp');
+  const cmdpInput = document.getElementById('cmdpInput');
+  const cmdpList = document.getElementById('cmdpList');
+  const cmdpClose = document.getElementById('cmdpClose');
+
+  /* ===== DATA ===== */
   const DATA = { groups: [
     { name: "React", icon: "⚛️", subtitle: "Hệ sinh thái React", items: [
       {t:"React – Official Docs", url:"https://react.dev", lang:"EN", type:"official", desc:"React official documentation.", tags:["react","official"]},
@@ -285,52 +426,58 @@
     ]},
   ]};
 
-  /* ---------- State ---------- */
+  /* ===== STATE ===== */
   const state = {
     theme: localStorage.getItem(THEME_KEY) || 'auto',
     favorites: JSON.parse(localStorage.getItem(FAV_KEY) || "[]"),
     notes: JSON.parse(localStorage.getItem(NOTES_KEY) || "{}"),
+    data: JSON.parse(localStorage.getItem(DATA_KEY) || "null") || DATA,
     openInPreview: false,
     currentLink: null,
-    data: JSON.parse(localStorage.getItem(DATA_KEY) || "null") || DATA, // allow persisted index
   };
 
-  // Apply theme
-  function applyTheme(){
-    document.documentElement.setAttribute('data-theme', state.theme);
-    themeSelect.value = state.theme;
-    localStorage.setItem(THEME_KEY, state.theme);
-  }
-  themeSelect.addEventListener('change', ()=>{ state.theme = themeSelect.value; applyTheme();});
+  /* ===== THEME ===== */
+  function applyTheme(){ html.setAttribute('data-theme', state.theme); themeSelect.value = state.theme; localStorage.setItem(THEME_KEY, state.theme); }
   applyTheme();
+  themeSelect.addEventListener('change', ()=>{ state.theme = themeSelect.value; applyTheme(); });
+  swatches.addEventListener('click', (e)=>{ const t=e.target.closest('button'); if(!t) return; state.theme=t.dataset.theme; applyTheme(); });
 
-  // Build groups UI
+  /* ===== BUILD SIDEBAR ===== */
+  function buildSidebar(){
+    sidebarGroups.innerHTML = "";
+    state.data.groups.forEach((g, idx)=>{
+      const b = document.createElement('button');
+      b.className="group-btn"; b.innerHTML = `<span>${g.icon||"📦"}</span><span>${g.name}</span>`;
+      b.addEventListener('click', ()=>{
+        // scroll to group in main
+        const el = document.querySelector(`[data-group-index="${idx}"]`);
+        if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); highlight(el); }
+      });
+      sidebarGroups.appendChild(b);
+    });
+  }
+  function highlight(el){ el.style.boxShadow="0 0 0 3px var(--accent) inset"; setTimeout(()=> el.style.boxShadow="", 500); }
+
+  /* ===== BUILD GROUPS (MAIN) ===== */
   function buildGroups(){
-    groupsRoot.innerHTML = "";
-    const frag = document.createDocumentFragment();
-    state.data.groups.forEach(group => {
+    groupsRoot.innerHTML=""; const frag=document.createDocumentFragment();
+    state.data.groups.forEach((group, gi)=>{
       const det = document.createElement('details');
-      det.className = "group";
-      det.open = true;
+      det.className="group"; det.open=true; det.dataset.groupIndex=gi;
 
-      const summary = document.createElement('summary');
-      const left = document.createElement('div');
-      left.className = "gtitle";
-      left.innerHTML = `<span>${group.icon}</span><span>${group.name} — <span class="meta">${group.subtitle}</span></span>`;
-      const badge = document.createElement('span');
-      badge.className = "badge";
-      const viCount = group.items.filter(i=>i.lang==="VI").length;
-      badge.textContent = (viCount>0? "EN + VI" : "EN");
-      summary.appendChild(left);
-      summary.appendChild(badge);
-      det.appendChild(summary);
+      const sum = document.createElement('summary');
+      sum.innerHTML = `<div style="display:flex;align-items:center;gap:10px">
+        <span>${group.icon||"📦"}</span><strong>${group.name}</strong>
+        <span class="meta">— ${group.subtitle||""}</span></div>
+        <span class="chip">${group.items.filter(i=>i.lang==="VI").length>0?"EN+VI":"EN"}</span>`;
+      det.appendChild(sum);
 
-      const links = document.createElement('div');
-      links.className = "links";
+      // accordion body (animated)
+      const acc = document.createElement('div'); acc.className="accordion";
+      const links = document.createElement('div'); links.className="links";
 
-      group.items.forEach(item => {
-        const row = document.createElement('div');
-        row.className = "item";
+      group.items.forEach(item=>{
+        const row = document.createElement('div'); row.className="item";
         row.dataset.group = group.name;
         row.dataset.type = item.type;
         row.dataset.lang = item.lang;
@@ -338,226 +485,309 @@
         row.dataset.title = item.t;
         row.dataset.tags = (item.tags || []).join(",");
 
-        const star = document.createElement('span');
-        star.className = "star";
-        star.textContent = state.favorites.includes(item.url) ? "⭐" : "☆";
-        if (state.favorites.includes(item.url)) star.classList.add('active');
-        star.title = "Thêm/Bỏ yêu thích";
-        star.addEventListener('click', (e)=>{
-          e.stopPropagation();
-          toggleFavorite(item.url, star);
-        });
+        const favActive = state.favorites.includes(item.url);
+        const star = document.createElement('span'); star.className="star"; star.textContent = favActive ? "★" : "☆";
+        if (favActive) star.classList.add('active');
+        star.title="Thêm/Bỏ yêu thích";
+        star.addEventListener('click', (e)=>{ e.stopPropagation(); toggleFavorite(item.url, star); });
 
-        const a = document.createElement('a');
-        a.href = item.url; a.target = "_blank";
+        const favico = document.createElement('img'); favico.className="favico";
+        try{
+          const u = new URL(item.url);
+          favico.src = `https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`;
+        }catch{ favico.src=""; }
+
+        const a = document.createElement('a'); a.href=item.url; a.target="_blank";
         a.textContent = item.t + (item.lang ? ` (${item.lang})` : "");
         a.title = item.desc || "";
         a.addEventListener('click', (e)=>{
-          if (state.openInPreview || e.shiftKey){
-            e.preventDefault();
-            openInPreview(item.url);
-            setCurrentNoteLink(item.url, item.t);
-          }else{
-            setCurrentNoteLink(item.url, item.t);
-          }
+          if (state.openInPreview || e.shiftKey){ e.preventDefault(); openInPreview(item.url); setCurrentNoteLink(item.url, item.t); }
+          else { setCurrentNoteLink(item.url, item.t); }
         });
         a.addEventListener('mouseenter', (e)=> showTooltip(e, item));
         a.addEventListener('mouseleave', hideTooltip);
 
-        const meta = document.createElement('span');
-        meta.className = 'meta';
-        meta.textContent = `• ${item.type}`;
+        const meta = document.createElement('span'); meta.className='meta'; meta.textContent = `• ${item.type}`;
 
-        row.appendChild(star);
-        row.appendChild(a);
-        row.appendChild(meta);
+        row.appendChild(star); row.appendChild(favico); row.appendChild(a); row.appendChild(meta);
         links.appendChild(row);
       });
 
-      det.appendChild(links);
+      acc.appendChild(links); det.appendChild(acc);
+      // close others on open, save open state
+      det.addEventListener('toggle', ()=>{ saveOpenGroups(); });
+
       frag.appendChild(det);
     });
     groupsRoot.appendChild(frag);
-    updateStats();
-    buildSuggestions();
+    updateStats(); buildSuggestions(); restoreOpenGroups();
   }
 
+  /* ===== STATS ===== */
   function updateStats(){
     const all = Array.from(groupsRoot.querySelectorAll('.item'));
-    const total = all.length;
-    const en = all.filter(x=>x.dataset.lang==="EN").length;
-    const vi = all.filter(x=>x.dataset.lang==="VI").length;
-    const fav = state.favorites.length;
-    statTotal.textContent = `Tổng link: ${total}`;
-    statEN.textContent = `EN: ${en}`;
-    statVI.textContent = `VI: ${vi}`;
-    statFav.textContent = `⭐ Favorites: ${fav}`;
+    statTotal.textContent = `Tổng link: ${all.length}`;
+    statEN.textContent = `EN: ${all.filter(x=>x.dataset.lang==="EN").length}`;
+    statVI.textContent = `VI: ${all.filter(x=>x.dataset.lang==="VI").length}`;
+    statFav.textContent = `⭐ Favorites: ${state.favorites.length}`;
   }
 
-  function buildSuggestions(){
-    suggestList.innerHTML = "";
-    const set = new Set();
-    state.data.groups.forEach(g => g.items.forEach(i => {
-      set.add(i.t); (i.tags||[]).forEach(t=>set.add(t)); set.add(g.name);
-    }));
-    [...set].sort().forEach(x=>{
-      const opt = document.createElement('option'); opt.value = x; suggestList.appendChild(opt);
-    });
-  }
-
-  // Favorites
+  /* ===== FAVORITES ===== */
   function toggleFavorite(url, el){
-    const idx = state.favorites.indexOf(url);
-    if (idx === -1) state.favorites.push(url); else state.favorites.splice(idx,1);
+    const i = state.favorites.indexOf(url);
+    if (i===-1) state.favorites.push(url); else state.favorites.splice(i,1);
     localStorage.setItem(FAV_KEY, JSON.stringify(state.favorites));
-    el.textContent = state.favorites.includes(url) ? "⭐" : "☆";
+    el.textContent = state.favorites.includes(url) ? "★" : "☆";
     el.classList.toggle('active', state.favorites.includes(url));
-    updateStats();
-    applyFilters(); // refresh Favorites view
+    updateStats(); applyFilters();
   }
 
-  // Tooltip
+  /* ===== TOOLTIP ===== */
   function showTooltip(e, item){
-    tooltip.textContent = item.desc || '';
-    if (!tooltip.textContent) return;
-    tooltip.style.display = 'block';
-    const pad = 10;
-    tooltip.style.left = (e.pageX + pad) + 'px';
-    tooltip.style.top = (e.pageY + pad) + 'px';
+    tooltip.textContent = item.desc || ''; if(!tooltip.textContent) return;
+    tooltip.style.display='block'; const pad=10; tooltip.style.left=(e.pageX+pad)+'px'; tooltip.style.top=(e.pageY+pad)+'px';
   }
-  function hideTooltip(){ tooltip.style.display = 'none'; }
+  function hideTooltip(){ tooltip.style.display='none'; }
 
-  // Preview
-  function openInPreview(url){
-    previewFrame.classList.remove('hidden');
-    previewFrame.src = url;
-  }
-  previewToggle.addEventListener('change', ()=>{
-    state.openInPreview = previewToggle.checked;
-    if (!state.openInPreview) previewFrame.classList.add('hidden');
-  });
-  document.addEventListener('keydown',(e)=>{
-    if (e.shiftKey && (e.key === 'O' || e.key === 'o')){
-      previewToggle.checked = !previewToggle.checked;
-      previewToggle.dispatchEvent(new Event('change'));
-    }
-  });
+  /* ===== PREVIEW ===== */
+  function openInPreview(url){ previewFrame.classList.remove('hidden'); spinner.style.display='flex'; previewFrame.src=url; }
+  previewFrame.addEventListener('load', ()=> spinner.style.display='none');
+  previewToggleEl.addEventListener('change', ()=>{ state.openInPreview = previewToggleEl.checked; if(!state.openInPreview) previewFrame.classList.add('hidden'); });
+  document.addEventListener('keydown',(e)=>{ if (e.shiftKey && (e.key === 'O' || e.key === 'o')){ previewToggleEl.checked = !previewToggleEl.checked; previewToggleEl.dispatchEvent(new Event('change')); } });
 
-  function setCurrentNoteLink(url, title){
-    state.currentLink = url;
-    noteLink.textContent = title || url || "—";
-    noteArea.value = (state.notes[url] || "");
-  }
-  saveNoteBtn.addEventListener('click', ()=>{
-    if (!state.currentLink) return alert("Hãy mở một liên kết trước đã.");
-    state.notes[state.currentLink] = noteArea.value || "";
-    localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes));
-    alert("Đã lưu ghi chú.");
-  });
-  delNoteBtn.addEventListener('click', ()=>{
-    if (!state.currentLink) return;
-    delete state.notes[state.currentLink];
-    localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes));
-    noteArea.value = "";
-    alert("Đã xóa ghi chú.");
-  });
+  /* ===== NOTES ===== */
+  function setCurrentNoteLink(url, title){ state.currentLink=url; noteLink.textContent = title || url || "—"; noteArea.value = (state.notes[url] || ""); }
+  saveNoteBtn.addEventListener('click', ()=>{ if(!state.currentLink) return alert("Hãy mở một liên kết trước đã."); state.notes[state.currentLink]=noteArea.value||""; localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); alert("Đã lưu ghi chú.");});
+  delNoteBtn.addEventListener('click', ()=>{ if(!state.currentLink) return; delete state.notes[state.currentLink]; localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); noteArea.value=""; alert("Đã xóa ghi chú."); });
 
-  // Search & Filters
+  /* ===== SEARCH + FILTER ===== */
   function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
   function applyFilters(){
-    const q = normalize(searchInput.value);
-    const g = groupFilter.value;
-    const tp = typeFilter.value;
+    const q = normalize(searchInput.value), g = groupFilter.value, tp = typeFilter.value;
     const items = Array.from(groupsRoot.querySelectorAll('.item'));
     items.forEach(it=>{
-      const title = normalize(it.dataset.title + " " + it.dataset.tags + " " + it.dataset.url + " " + it.dataset.group + " " + it.dataset.type + " " + it.dataset.lang);
-      let hit = (!q || title.includes(q));
-      if (g) {
-        if (g === "Favorites") hit = hit && state.favorites.includes(it.dataset.url);
-        else hit = hit && it.dataset.group === g;
-      }
-      if (tp) hit = hit && it.dataset.type === tp;
+      const text = normalize(it.dataset.title + " " + it.dataset.tags + " " + it.dataset.url + " " + it.dataset.group + " " + it.dataset.type + " " + it.dataset.lang);
+      let hit = (!q || text.includes(q));
+      if (g){ if (g==="Favorites") hit = hit && state.favorites.includes(it.dataset.url); else hit = hit && it.dataset.group===g; }
+      if (tp) hit = hit && it.dataset.type===tp;
       it.style.display = hit ? "flex" : "none";
     });
     // auto open groups with visible items
     Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=>{
+      const body = d.querySelector('.accordion');
       const any = Array.from(d.querySelectorAll('.item')).some(x => x.style.display !== 'none');
-      d.open = any;
-      d.classList.toggle('hidden', !any);
+      d.open = any; d.classList.toggle('hidden', !any);
+      body.style.maxHeight = d.open ? '800px' : '0px';
+      body.style.opacity  = d.open ? '1' : '0';
     });
   }
   searchInput.addEventListener('input', applyFilters);
   groupFilter.addEventListener('change', applyFilters);
   typeFilter.addEventListener('change', applyFilters);
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === '/'){ e.preventDefault(); searchInput.focus(); }
-  });
+  document.addEventListener('keydown', (e)=>{ if (e.key === '/'){ e.preventDefault(); searchInput.focus(); } });
 
-  // Expand/Collapse
-  expandAllBtn.addEventListener('click', ()=>{
-    Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=>{ d.open = true; d.classList.remove('hidden'); });
-  });
-  collapseAllBtn.addEventListener('click', ()=>{
-    Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=> d.open = false);
-  });
+  /* ===== EXPAND/COLLAPSE ===== */
+  expandAllBtn.addEventListener('click', ()=>{ document.querySelectorAll('details.group').forEach(d=>{ d.open=true; const b=d.querySelector('.accordion'); if(b){b.style.maxHeight='800px'; b.style.opacity='1';} }); saveOpenGroups(); });
+  collapseAllBtn.addEventListener('click', ()=>{ document.querySelectorAll('details.group').forEach(d=>{ d.open=false; const b=d.querySelector('.accordion'); if(b){b.style.maxHeight='0px'; b.style.opacity='0';} }); saveOpenGroups(); });
 
-  // Export
+  /* ===== EXPORT/IMPORT ===== */
   printBtn.addEventListener('click', ()=> window.print());
-  function download(filename, text, type="text/plain"){
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([text], {type}));
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
-  exportJsonBtn.addEventListener('click', ()=>{
-    download('devdocs-index.json', JSON.stringify(state.data, null, 2), 'application/json');
-  });
+  function download(filename, text, type="text/plain"){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=filename; a.click(); URL.revokeObjectURL(a.href); }
+  exportJsonBtn.addEventListener('click', ()=> download('devdocs-index.json', JSON.stringify(state.data,null,2), 'application/json'));
   exportMdBtn.addEventListener('click', ()=>{
-    let md = `# DevDocs Portal (EN–VI)\nCập nhật: $2025-10-09 06:40:24\n\n`;
-    state.data.groups.forEach(g=>{
-      md += `## ${g.name} — ${g.subtitle}\n\n`;
-      g.items.forEach(i=>{
-        md += `- [${i.t}](${i.url}) — ${i.type}${i.lang? ' · ' + i.lang : ''}\n`;
-      });
-      md += `\n`;
-    });
+    let md = `# DevDocs Portal (EN–VI)\nCập nhật: ${TODAY}\n\n`;
+    state.data.groups.forEach(g=>{ md += `## ${g.name} — ${g.subtitle||""}\n\n`; g.items.forEach(i=>{ md += `- [${i.t}](${i.url}) — ${i.type}${i.lang? ' · ' + i.lang : ''}\n`; }); md+=`\n`; });
     download('devdocs-links.md', md, 'text/markdown');
   });
-
-  // Import (merge)
   importJsonInput.addEventListener('change', async (e)=>{
-    const f = e.target.files[0]; if (!f) return;
-    const text = await f.text();
-    try{
-      const incoming = JSON.parse(text);
-      mergeData(incoming);
-      localStorage.setItem(DATA_KEY, JSON.stringify(state.data));
-      buildGroups();
-      applyFilters();
-      alert("Đã nhập & hợp nhất JSON tài liệu.");
-    }catch(err){ alert("File JSON không hợp lệ."); }
-    importJsonInput.value = "";
+    const f=e.target.files[0]; if(!f) return; try{ const incoming=JSON.parse(await f.text()); mergeData(incoming); localStorage.setItem(DATA_KEY, JSON.stringify(state.data)); buildGroups(); applyFilters(); alert("Đã nhập & hợp nhất JSON tài liệu.");}catch{ alert("File JSON không hợp lệ."); } e.target.value="";
+  });
+  exportNotesBtn.addEventListener('click', ()=> download('devdocs-notes.json', JSON.stringify(state.notes,null,2), 'application/json'));
+  importNotesInput.addEventListener('change', async (e)=>{
+    const f=e.target.files[0]; if(!f) return; try{ Object.assign(state.notes, JSON.parse(await f.text())); localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); alert("Đã import notes."); }catch{ alert("Notes JSON không hợp lệ."); } e.target.value="";
   });
   function mergeData(incoming){
     const mapGroup = new Map(state.data.groups.map(g=>[g.name,g]));
     (incoming.groups||[]).forEach(g=>{
-      if (!mapGroup.has(g.name)){
-        state.data.groups.push(g);
-      }else{
-        const tgt = mapGroup.get(g.name);
-        const urls = new Set(tgt.items.map(i=>i.url));
-        (g.items||[]).forEach(i=>{
-          if (!urls.has(i.url)){ tgt.items.push(i); urls.add(i.url); }
-        });
+      if(!mapGroup.has(g.name)) state.data.groups.push(g);
+      else{
+        const tgt=mapGroup.get(g.name), urls=new Set(tgt.items.map(i=>i.url));
+        (g.items||[]).forEach(i=>{ if(!urls.has(i.url)){ tgt.items.push(i); urls.add(i.url); } });
       }
     });
   }
 
-  // Init
-  buildGroups();
-  applyFilters();
+  /* ===== OPEN GROUPS + SCROLL PERSIST ===== */
+  function saveOpenGroups(){
+    const open=[]; document.querySelectorAll('details.group').forEach((d,i)=>{ if(d.open) open.push(i); });
+    localStorage.setItem(OPEN_KEY, JSON.stringify(open));
+  }
+  function restoreOpenGroups(){
+    try{
+      const open=JSON.parse(localStorage.getItem(OPEN_KEY)||"[]");
+      document.querySelectorAll('details.group').forEach((d,i)=>{ d.open = open.includes(i); const b=d.querySelector('.accordion'); if(b){ b.style.maxHeight = d.open ? '800px':'0px'; b.style.opacity = d.open ? '1':'0'; } });
+    }catch{}
+  }
+  window.addEventListener('beforeunload', ()=> localStorage.setItem(SCROLL_KEY, String(window.scrollY)));
+  window.addEventListener('load', ()=>{ const y=parseInt(localStorage.getItem(SCROLL_KEY)||"0",10); if(!isNaN(y)) window.scrollTo(0,y); });
 
-})();</script>
+  /* ===== ZEN MODE (toggle + hotkey + persistent) ===== */
+  function applyZen(){ const zen = localStorage.getItem(ZEN_KEY)==='1'; document.body.classList.toggle('zen', zen); zenBtn.textContent = zen ? "✖️ Exit Zen" : "🧘 Zen"; }
+  applyZen();
+  zenBtn.addEventListener('click', ()=>{ const zen = !(localStorage.getItem(ZEN_KEY)==='1'); localStorage.setItem(ZEN_KEY, zen?'1':'0'); applyZen(); });
+  document.addEventListener('keydown', (e)=>{ if(e.altKey && (e.key==='z' || e.key==='Z')){ const zen = !(localStorage.getItem(ZEN_KEY)==='1'); localStorage.setItem(ZEN_KEY, zen?'1':'0'); applyZen(); } });
+
+  /* ===== COMMAND PALETTE (⌘/Ctrl + K) ===== */
+  function openCmd(){ cmdp.style.display='flex'; cmdpInput.value=''; buildCmdList(''); cmdpInput.focus(); }
+  function closeCmd(){ cmdp.style.display='none'; }
+  function buildCmdList(q){
+    cmdpList.innerHTML="";
+    const items = [];
+    state.data.groups.forEach(g=> g.items.forEach(i=> items.push({g:g.name, ...i})));
+    const norm = (s)=> (s||'').toLowerCase();
+    const filtered = q ? items.filter(x=>`${x.g} ${x.t} ${x.tags}`.toLowerCase().includes(q.toLowerCase())) : items.slice(0,200);
+    filtered.slice(0,400).forEach(it=>{
+      const row=document.createElement('div'); row.className='row';
+      const favico=document.createElement('img'); favico.className='favico';
+      try{ const u=new URL(it.url); favico.src=`https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`; }catch{}
+      const title=document.createElement('div'); title.innerHTML=`<strong>${it.t}</strong> <span class="meta">· ${it.g} · ${it.type}${it.lang?' · '+it.lang:''}</span>`;
+      row.appendChild(favico); row.appendChild(title);
+      row.addEventListener('click', ()=>{ if(state.openInPreview){ openInPreview(it.url); setCurrentNoteLink(it.url, it.t);} else { window.open(it.url,'_blank'); setCurrentNoteLink(it.url, it.t);} closeCmd(); });
+      cmdpList.appendChild(row);
+    });
+  }
+  cmdpInput.addEventListener('input', ()=> buildCmdList(cmdpInput.value));
+  cmdpClose.addEventListener('click', closeCmd);
+  document.addEventListener('keydown', (e)=>{
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+    if ((isMac && e.metaKey && e.key==='k') || (!isMac && e.ctrlKey && e.key==='k')){
+      e.preventDefault(); openCmd();
+    }
+  });
+  cmdp.addEventListener('click', (e)=>{ if(e.target===cmdp) closeCmd(); });
+
+  /* ===== SUGGESTIONS (datalist) ===== */
+  function buildSuggestions(){
+    suggestList.innerHTML=""; const set=new Set();
+    state.data.groups.forEach(g => g.items.forEach(i => { set.add(`${g.name}: ${i.t}`); (i.tags||[]).forEach(t=>set.add(`${g.name} · ${t}`)); set.add(g.name); }));
+    [...set].sort().forEach(x=>{ const opt=document.createElement('option'); opt.value=x; suggestList.appendChild(opt); });
+  }
+
+  /* ===== INIT ===== */
+  buildSidebar(); buildGroups(); buildSuggestions(); applyFilters();
+
+  /* ====== PWA SERVICE WORKER (inline) ====== */
+  if ('serviceWorker' in navigator){
+    // Inline service worker via Blob so vẫn là 1 file HTML tự đủ
+    const swCode = `
+      const CACHE = 'devdocs-v3';
+      const ASSETS = ['.']; // cache trang hiện tại
+      self.addEventListener('install', e=>{
+        e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
+        self.skipWaiting();
+      });
+      self.addEventListener('activate', e=>{
+        e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k===CACHE?null:caches.delete(k)))));
+        self.clients.claim();
+      });
+      self.addEventListener('fetch', e=>{
+        const url = new URL(e.request.url);
+        // Network-first cho docs online; cache-first cho chính app
+        if (url.origin === location.origin){
+          e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request).then(resp=>{
+            const clone = resp.clone(); caches.open(CACHE).then(c=>c.put(e.request, clone)); return resp;
+          }).catch(()=> caches.match('.'))));
+        } else {
+          // pass-through cho tài nguyên ngoài (docs, favicon)
+          e.respondWith(fetch(e.request).catch(()=> new Response('Offline', {status:503,statusText:'Offline'})));
+        }
+      });
+    `;
+    const blob = new Blob([swCode], {type:'application/javascript'});
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl);
+  }
+
+  /* ====== EPUB EXPORT (minimal ZIP store) ======
+     Tạo EPUB đơn giản: 1 chapter chứa toàn bộ link theo nhóm.
+     ZIP "store" (no compression) — đủ để nhiều reader mở.
+  */
+  function crc32(buf){ // CRC-32 tiny impl
+    let c=~0>>>0; for(let i=0;i<buf.length;i++){ c=c^(buf[i]); for(let k=0;k<8;k++){ c = (c>>>1) ^ (0xEDB88320 & (-(c&1))); } } return (~c)>>>0;
+  }
+  function str2u8(s){ return new TextEncoder().encode(s); }
+  function num32le(n){ const b=new Uint8Array(4); const dv=new DataView(b.buffer); dv.setUint32(0,n,true); return b; }
+  function num16le(n){ const b=new Uint8Array(2); const dv=new DataView(b.buffer); dv.setUint16(0,n,true); return b; }
+  function zipStore(files){ // files: [{name, data(Uint8Array), uncompressed:true}]
+    const fileRecords=[]; const chunks=[];
+    let offset=0;
+    for(const f of files){
+      const data = f.data;
+      const crc = crc32(data);
+      const nameU8 = str2u8(f.name);
+      // Local file header
+      const LFH = [
+        num32le(0x04034b50), num16le(20), num16le(0), num16le(0), num16le(0), num16le(0),
+        num32le(crc), num32le(data.length), num32le(data.length), num16le(nameU8.length), num16le(0)
+      ];
+      const head = concatU8(...LFH, nameU8);
+      chunks.push(head, data);
+      const headerOffset = offset; offset += head.length + data.length;
+      fileRecords.push({nameU8, crc, size:data.length, offset:headerOffset});
+    }
+    // Central Directory
+    const cdChunks=[]; let cdSize=0;
+    for(const fr of fileRecords){
+      const CDFH = [
+        num32le(0x02014b50), num16le(20), num16le(20), num16le(0), num16le(0), num16le(0), num16le(0),
+        num32le(fr.crc), num32le(fr.size), num32le(fr.size), num16le(fr.nameU8.length), num16le(0), num16le(0),
+        num16le(0), num16le(0), num32le(0), num32le(fr.offset)
+      ];
+      const rec = concatU8(...CDFH, fr.nameU8);
+      cdChunks.push(rec); cdSize += rec.length;
+    }
+    const cdStart = offset;
+    const cd = concatU8(...cdChunks); chunks.push(cd); offset += cd.length;
+    const EOCD = concatU8(
+      num32le(0x06054b50), num16le(0), num16le(0), num16le(fileRecords.length), num16le(fileRecords.length),
+      num32le(cdSize), num32le(cdStart), num16le(0)
+    );
+    chunks.push(EOCD);
+    return new Blob([concatU8(...chunks)], {type:'application/epub+zip'});
+  }
+  function concatU8(...arrs){ let total=0; arrs.forEach(a=> total+=a.length); const out=new Uint8Array(total); let off=0; arrs.forEach(a=>{ out.set(a,off); off+=a.length; }); return out; }
+
+  // Export EPUB button (add to toolbar automatically)
+  const epubBtn = document.createElement('button'); epubBtn.className='btn'; epubBtn.textContent='Export EPUB';
+  document.getElementById('toolbar').appendChild(epubBtn);
+  epubBtn.addEventListener('click', ()=>{
+    // Build simple EPUB content
+    const title = 'DevDocs Portal Links';
+    const listHTML = state.data.groups.map(g=>{
+      const items = g.items.map(i=>`<li><a href="${i.url}">${escapeHtml(i.t)}</a> — ${i.type}${i.lang? ' · '+i.lang:''}</li>`).join('');
+      return `<h2>${escapeHtml(g.name)} — <small>${escapeHtml(g.subtitle||'')}</small></h2><ul>${items}</ul>`;
+    }).join('\n');
+
+    const containerXml = `<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n  <rootfiles>\n    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n  </rootfiles>\n</container>`;
+    const navXhtml = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8"/><title>Nav</title></head><body><nav epub:type="toc"><ol><li><a href="chapter.xhtml">DevDocs</a></li></ol></nav></body></html>`;
+    const chapter = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8"/><title>${escapeHtml(title)}</title></head><body><h1>${escapeHtml(title)}</h1>${listHTML}</body></html>`;
+    const opf = `<?xml version="1.0" encoding="utf-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="3.0">\n  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">\n    <dc:identifier id="BookId">devdocs-portal-v3</dc:identifier>\n    <dc:title>${escapeXml(title)}</dc:title>\n    <dc:language>en</dc:language>\n  </metadata>\n  <manifest>\n    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>\n    <item id="chap" href="chapter.xhtml" media-type="application/xhtml+xml"/>\n  </manifest>\n  <spine>\n    <itemref idref="chap"/>\n  </spine>\n</package>`;
+
+    const files = [
+      {name:'mimetype', data:str2u8('application/epub+zip')}, // must be first, uncompressed
+      {name:'META-INF/container.xml', data:str2u8(containerXml)},
+      {name:'OEBPS/nav.xhtml', data:str2u8(navXhtml)},
+      {name:'OEBPS/chapter.xhtml', data:str2u8(chapter)},
+      {name:'OEBPS/content.opf', data:str2u8(opf)},
+    ];
+    const blob = zipStore(files);
+    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='DevDocs_Portal.epub'; a.click(); URL.revokeObjectURL(a.href);
+  });
+
+  function escapeHtml(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function escapeXml(s){ return escapeHtml(s); }
+
+})();
+</script>
 </body>
 </html>

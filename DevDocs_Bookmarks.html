@@ -1,394 +1,563 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="auto">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DevDocs Toàn Thư – Song Ngữ (EN–VI)</title>
-<meta name="description" content="Tổng hợp tài liệu chính thức cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái liên quan. Song ngữ Anh–Việt.">
+<title>DevDocs Portal — EN–VI</title>
+<meta name="description" content="Cổng tri thức lập trình song ngữ, tổng hợp tài liệu chính thức cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái.">
 <style>
-  :root {
-    --bg: #ffffff;
-    --fg: #24292e;
-    --muted: #57606a;
-    --card: #f6f8fa;
-    --link: #0969da;
-    --border: #d0d7de;
-    --accent: #1f6feb;
-    --code: #0b0d0e;
-    --kbd-bg: #f6f8fa;
-    --kbd-fg: #24292e;
-    --shadow: rgba(27,31,35,0.04);
+  /* ---------- Base Tokens (GitHub Light/Dark) ---------- */
+  :root{
+    --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.06);
+    --danger:#dc2626; --warn:#d97706; --ok:#16a34a;
+    --code-bg:#f6f8fa; --code-fg:#24292e;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0d1117;
-      --fg: #c9d1d9;
-      --muted: #8b949e;
-      --card: #161b22;
-      --link: #58a6ff;
-      --border: #30363d;
-      --accent: #1f6feb;
-      --code: #c9d1d9;
-      --kbd-bg: #0d1117;
-      --kbd-fg: #c9d1d9;
-      --shadow: rgba(1,4,9,0.3);
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35);
+      --danger:#ef4444; --warn:#f59e0b; --ok:#22c55e;
+      --code-bg:#0d1117; --code-fg:#c9d1d9;
     }
   }
-  /* Theme override via data-theme */
-  html[data-theme="light"] {
-    --bg: #ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --code:#0b0d0e; --kbd-bg:#f6f8fa; --kbd-fg:#24292e; --shadow: rgba(27,31,35,0.04);
-  }
-  html[data-theme="dark"] {
-    --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --code:#c9d1d9; --kbd-bg:#0d1117; --kbd-fg:#c9d1d9; --shadow: rgba(1,4,9,0.3);
-  }
+  /* Theme overrides */
+  html[data-theme="light"]{ --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.06); --code-bg:#f6f8fa; --code-fg:#24292e;}
+  html[data-theme="dark"]{ --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35); --code-bg:#0d1117; --code-fg:#c9d1d9;}
+  html[data-theme="vscode"]{ --bg:#0e1114; --fg:#d4d4d4; --muted:#9da3ae; --card:#11151a; --link:#4fc1ff; --border:#2a2f36; --accent:#3ea6ff; --shadow:rgba(0,0,0,0.35); --code-bg:#0b0f14; --code-fg:#d4d4d4;}
+  html[data-theme="hacker"]{ --bg:#050505; --fg:#d0ffd0; --muted:#80c080; --card:#0a0f0a; --link:#00ff99; --border:#113311; --accent:#00e676; --shadow:rgba(0,255,153,0.15); --code-bg:#0a0f0a; --code-fg:#d0ffd0;}
+  html[data-theme="solarized"]{ --bg:#fdf6e3; --fg:#073642; --muted:#657b83; --card:#eee8d5; --link:#268bd2; --border:#d3c6a6; --accent:#2aa198; --shadow:rgba(0,0,0,0.08); --code-bg:#eee8d5; --code-fg:#073642;}
+  html[data-theme="monokai"]{ --bg:#272822; --fg:#f8f8f2; --muted:#a6e22e; --card:#2d2e28; --link:#66d9ef; --border:#3c3d36; --accent:#fd971f; --shadow:rgba(0,0,0,0.4); --code-bg:#2d2e28; --code-fg:#f8f8f2;}
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    background: var(--bg);
-    color: var(--fg);
-    line-height: 1.6;
-  }
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-  }
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 16px;
-  }
-  .title-row {
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  }
-  .logo {
-    width: 28px; height: 28px; border-radius: 6px; background: var(--accent);
-    box-shadow: 0 2px 8px var(--shadow); display: grid; place-items: center; color: white; font-weight: 700;
-  }
-  h1 { font-size: 20px; margin: 0; }
-  .subtitle { color: var(--muted); font-size: 14px; }
-  .toolbar {
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px;
-  }
-  .search {
-    flex: 1 1 340px; display: flex; gap: 8px; align-items: center;
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
-  }
-  .search input {
-    flex: 1; border: none; outline: none; background: transparent; color: var(--fg);
-    font-size: 14px;
-  }
-  .btn, summary {
-    appearance: none; border: 1px solid var(--border); background: var(--card);
-    color: var(--fg); padding: 8px 10px; border-radius: 8px; font-size: 14px;
-    cursor: pointer;
-  }
-  .btn:hover, summary:hover { border-color: var(--muted); }
-  .chip {
-    border: 1px solid var(--border); background: transparent; color: var(--muted);
-    padding: 4px 8px; border-radius: 999px; font-size: 12px;
-  }
-  main { padding: 16px; }
-  details.group {
-    border: 1px solid var(--border);
-    border-radius: 10px; margin-bottom: 14px; background: var(--card);
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  details.group > summary {
-    user-select: none;
-    list-style: none; display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; padding: 12px 14px; font-weight: 600; background: transparent;
-  }
-  details.group[open] > summary { border-bottom: 1px solid var(--border); }
-  .group-title { display: flex; align-items: center; gap: 10px; }
-  .group-title .icon { font-size: 18px; }
-  .links {
-    padding: 12px 14px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 6px 16px;
-  }
-  .links a {
-    text-decoration: none; color: var(--link); padding: 6px 0;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .links small { color: var(--muted); }
-  .hint { color: var(--muted); font-size: 13px; }
-  footer {
-    border-top: 1px solid var(--border); padding: 16px; color: var(--muted);
-    text-align: center;
-  }
-  kbd {
-    background: var(--kbd-bg); color: var(--kbd-fg);
-    border: 1px solid var(--border); border-bottom-width: 2px;
-    border-radius: 6px; padding: 2px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-    font-size: 12px;
-  }
-  .controls-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-  .badge { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
-  .hidden { display: none !important; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,ui-sans-serif,System-ui,Segoe UI,Roboto,Arial;line-height:1.6}
+  a{color:var(--link);text-decoration:none}
+  header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border)}
+  .container{max-width:1220px;margin:0 auto;padding:14px 16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .logo{width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:0 2px 10px var(--shadow)}
+  h1{font-size:20px;margin:0}
+  .subtitle{color:var(--muted);font-size:13px}
+  .grow{flex:1}
+  .btn, .select, summary{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--fg);padding:8px 10px;border-radius:8px;font-size:14px;cursor:pointer}
+  .btn:hover, summary:hover{border-color:var(--muted)}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .search{flex:1 1 360px;display:flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+  .search input{flex:1;border:none;outline:none;background:transparent;color:var(--fg);font-size:14px}
+  .chip{border:1px solid var(--border);color:var(--muted);padding:4px 8px;border-radius:999px;font-size:12px}
+  main{display:flex;gap:12px;padding:14px 16px}
+  .left{flex: 1 1 720px;min-width: 320px}
+  .right{flex: 1 1 480px;min-width: 280px;display:flex;flex-direction:column;gap:12px}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 8px var(--shadow)}
+  .panel h3{margin:0;padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px}
+  .panel-body{padding:10px 12px}
+  details.group{border:1px solid var(--border);border-radius:10px;margin-bottom:12px;background:var(--card);box-shadow:0 2px 6px var(--shadow)}
+  details.group > summary{user-select:none;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;font-weight:600}
+  details.group[open] > summary{border-bottom:1px solid var(--border)}
+  .gtitle{display:flex;align-items:center;gap:10px}
+  .badge{border:1px solid var(--border);border-radius:6px;padding:2px 6px;color:var(--muted);font-size:12px}
+  .links{padding:12px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 16px}
+  .item{display:flex;align-items:center;gap:8px;padding:6px 0}
+  .star{cursor:pointer;opacity:.6}
+  .star.active{color:#f59e0b;opacity:1}
+  .meta{color:var(--muted);font-size:12px}
+  .tooltip{position:fixed;z-index:50;pointer-events:none;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-size:12px;box-shadow:0 6px 20px var(--shadow);max-width:320px;display:none}
+  iframe{width:100%;height:60vh;border:none;border-top:1px solid var(--border)}
+  .note-area{width:100%;min-height:120px;background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:ui-monospace,Consolas,Menlo,monospace}
+  .stats{display:flex;flex-wrap:wrap;gap:8px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px}
+  .hidden{display:none!important}
+  @media (max-width: 980px){ main{flex-direction:column} .right{order:-1} }
+  @media print{ header, .toolbar, .right, .star, .controls-row{ display:none !important } details.group{border:none;box-shadow:none} body{background:#fff;color:#000} }
 </style>
 </head>
 <body>
 <header>
   <div class="container">
-    <div class="title-row">
+    <div class="row">
       <div class="logo">DD</div>
-      <div>
-        <h1>DevDocs Toàn Thư – Song Ngữ (EN–VI)</h1>
-        <div class="subtitle">Tổng hợp tài liệu CHÍNH THỨC cho React, Tailwind, Python, C#, Java, Go, HTML/CSS và hệ sinh thái. Phong cách GitHub. </div>
+      <div class="grow">
+        <h1>DevDocs Portal — Song Ngữ (EN–VI)</h1>
+        <div class="subtitle">Cổng tài liệu chính thức: React, Tailwind, Python, C#, Java, Go, HTML/CSS & hệ sinh thái. Phong cách GitHub. Cập nhật: 2025-10-09 06:40:24</div>
       </div>
-      <div class="right">
-        <button id="themeBtn" class="btn" title="Đổi giao diện (Auto/Light/Dark)">Theme: <span id="themeState">Auto</span></button>
+      <div>
+        <select id="themeSelect" class="select" title="Chủ đề giao diện">
+          <option value="auto">Theme: Auto</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="vscode">VS Code Blue</option>
+          <option value="hacker">Hacker Neon</option>
+          <option value="solarized">Solarized</option>
+          <option value="monokai">Monokai</option>
+        </select>
       </div>
     </div>
+
     <div class="toolbar">
       <div class="search">
         <span>🔎</span>
-        <input id="searchInput" type="search" placeholder="Tìm tài liệu… (ví dụ: React, Flask, Spring Boot, LINQ, Gin, Tailwind) | Search docs…" />
+        <input id="searchInput" type="search" list="suggestList" placeholder="Tìm tài liệu… / Search docs…" />
+        <datalist id="suggestList"></datalist>
       </div>
-      <div class="controls-row">
-        <button class="btn" id="expandAll">Mở tất cả</button>
-        <button class="btn" id="collapseAll">Thu gọn tất cả</button>
-        <span class="chip">Mẹo: nhấn <kbd>/</kbd> để bật ô tìm kiếm</span>
-      </div>
+      <select id="groupFilter" class="select">
+        <option value="">Tất cả nhóm</option>
+        <option>React</option><option>Tailwind</option><option>Python</option><option>C#</option><option>Java</option><option>Go</option><option>Web</option><option>Tools</option><option>Favorites</option>
+      </select>
+      <select id="typeFilter" class="select">
+        <option value="">Mọi loại</option>
+        <option value="official">Official</option>
+        <option value="vi">Tiếng Việt</option>
+        <option value="framework">Framework</option>
+        <option value="library">Library</option>
+        <option value="tool">Tool</option>
+        <option value="spec">Spec</option>
+        <option value="api">API</option>
+        <option value="guide">Guide</option>
+      </select>
+      <button id="expandAll" class="btn">Mở tất cả</button>
+      <button id="collapseAll" class="btn">Thu gọn tất cả</button>
+      <button id="printBtn" class="btn" title="In ra PDF (dùng Print to PDF của trình duyệt)">In / PDF</button>
+      <button id="exportJson" class="btn">Export JSON</button>
+      <button id="exportMd" class="btn">Export Markdown</button>
+      <label class="btn"><input id="importJson" type="file" accept="application/json" class="hidden">Import JSON</label>
+      <span class="chip">Phím tắt: <kbd>/</kbd> tìm kiếm • <kbd>Shift</kbd>+<kbd>O</kbd> xem trong panel</span>
     </div>
   </div>
 </header>
-<main class="container" id="content">
-  <!-- React & Ecosystem -->
-  <details class="group" open>
-    <summary>
-      <div class="group-title"><span class="icon">⚛️</span><span>React & Ecosystem — <span class="hint">Hệ sinh thái React</span></span></div>
-      <span class="badge">EN + VI</span>
-    </summary>
-    <div class="links">
-      <a href="https://react.dev" target="_blank">React – Official Docs <small>(EN)</small></a>
-      <a href="https://legacy.reactjs.org" target="_blank">React – Legacy Docs <small>(EN, có bản dịch một phần)</small></a>
-      <a href="https://vi.reactjs.org/" target="_blank">React – Tài liệu tiếng Việt <small>(nếu còn bản dịch)</small></a>
-      <a href="https://nextjs.org/docs" target="_blank">Next.js – Docs <small>(EN)</small></a>
-      <a href="https://redux-toolkit.js.org" target="_blank">Redux Toolkit – Docs <small>(EN)</small></a>
-      <a href="https://reactrouter.com/en/main" target="_blank">React Router – Docs <small>(EN)</small></a>
-      <a href="https://tanstack.com/query/latest/docs/react" target="_blank">TanStack Query (React Query) – Docs <small>(EN)</small></a>
-      <a href="https://www.typescriptlang.org/docs/" target="_blank">TypeScript – Docs <small>(EN)</small></a>
-      <a href="https://vitejs.dev/guide/" target="_blank">Vite – Guide <small>(EN)</small></a>
-      <a href="https://babeljs.io/docs/" target="_blank">Babel – Docs <small>(EN)</small></a>
-    </div>
-  </details>
 
-  <!-- Tailwind & UI Frameworks -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🎨</span><span>Tailwind & UI Frameworks — <span class="hint">Thư viện giao diện</span></span></div>
-      <span class="badge">EN + VI</span>
-    </summary>
-    <div class="links">
-      <a href="https://tailwindcss.com/docs" target="_blank">Tailwind CSS – Docs <small>(EN)</small></a>
-      <a href="https://v1.tailwindcss.vn/docs" target="_blank">Tailwind CSS – Tài liệu tiếng Việt <small>(VI, bản dịch community)</small></a>
-      <a href="https://ui.shadcn.com" target="_blank">shadcn/ui – Docs <small>(EN)</small></a>
-      <a href="https://daisyui.com/components/" target="_blank">daisyUI – Components <small>(EN)</small></a>
-      <a href="https://flowbite.com/docs/" target="_blank">Flowbite – Docs <small>(EN)</small></a>
-      <a href="https://headlessui.com" target="_blank">Headless UI – Docs <small>(EN)</small></a>
+<main class="container">
+  <section class="left">
+    <div class="panel stats">
+      <div class="stat" id="stat-total">Tổng link: 0</div>
+      <div class="stat" id="stat-en">EN: 0</div>
+      <div class="stat" id="stat-vi">VI: 0</div>
+      <div class="stat" id="stat-fav">⭐ Favorites: 0</div>
     </div>
-  </details>
 
-  <!-- Python & Data Science -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🐍</span><span>Python & Data Science — <span class="hint">Ngôn ngữ & ML</span></span></div>
-      <span class="badge">EN + VI</span>
-    </summary>
-    <div class="links">
-      <a href="https://docs.python.org/3/" target="_blank">Python – Official Docs <small>(EN)</small></a>
-      <a href="https://docs.python.org/vi/3/" target="_blank">Python – Tài liệu tiếng Việt <small>(VI)</small></a>
-      <a href="https://pypi.org/" target="_blank">PyPI – Python Package Index <small>(EN)</small></a>
-      <a href="https://numpy.org/doc/" target="_blank">NumPy – Docs <small>(EN)</small></a>
-      <a href="https://pandas.pydata.org/docs/" target="_blank">Pandas – Docs <small>(EN)</small></a>
-      <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn – Docs <small>(EN)</small></a>
-      <a href="https://matplotlib.org/stable/contents.html" target="_blank">Matplotlib – Docs <small>(EN)</small></a>
-      <a href="https://flask.palletsprojects.com/en/stable/" target="_blank">Flask – Docs <small>(EN)</small></a>
-      <a href="https://docs.djangoproject.com/en/stable/" target="_blank">Django – Docs <small>(EN)</small></a>
-      <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI – Docs <small>(EN)</small></a>
-      <a href="https://docs.python-guide.org/" target="_blank">The Hitchhiker’s Guide to Python <small>(EN)</small></a>
-    </div>
-  </details>
+    <div id="groups"></div>
+  </section>
 
-  <!-- C# & .NET -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🧱</span><span>C# & .NET Platform — <span class="hint">Nền tảng .NET</span></span></div>
-      <span class="badge">EN</span>
-    </summary>
-    <div class="links">
-      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank">C# – Microsoft Learn <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/dotnet/api/" target="_blank">.NET – API Reference <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/aspnet/core" target="_blank">ASP.NET Core – Docs <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/ef/core/" target="_blank">Entity Framework Core – Docs <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/" target="_blank">WinForms – Docs <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/" target="_blank">Blazor – Docs <small>(EN)</small></a>
-      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/" target="_blank">LINQ – Docs <small>(EN)</small></a>
-      <a href="https://www.nuget.org/" target="_blank">NuGet – Packages <small>(EN)</small></a>
+  <aside class="right">
+    <div class="panel">
+      <h3>📄 Xem trước tài liệu (Preview)</h3>
+      <div class="panel-body">
+        <label><input type="checkbox" id="previewToggle"> Mở link trong khung xem trước (iframe)</label>
+        <iframe id="previewFrame" class="hidden"></iframe>
+      </div>
     </div>
-  </details>
 
-  <!-- Java & Spring -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">☕</span><span>Java & Spring — <span class="hint">Hệ sinh thái Java</span></span></div>
-      <span class="badge">EN</span>
-    </summary>
-    <div class="links">
-      <a href="https://docs.oracle.com/en/java/javase/" target="_blank">Java SE – Docs <small>(EN)</small></a>
-      <a href="https://docs.oracle.com/javase/tutorial/" target="_blank">The Java Tutorials <small>(EN)</small></a>
-      <a href="https://docs.spring.io/spring-framework/reference/" target="_blank">Spring Framework – Reference <small>(EN)</small></a>
-      <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/" target="_blank">Spring Boot – Reference <small>(EN)</small></a>
-      <a href="https://hibernate.org/orm/documentation/" target="_blank">Hibernate ORM – Docs <small>(EN)</small></a>
-      <a href="https://maven.apache.org/guides/" target="_blank">Maven – Guides <small>(EN)</small></a>
-      <a href="https://docs.gradle.org/current/userguide/userguide.html" target="_blank">Gradle – User Guide <small>(EN)</small></a>
-      <a href="https://openjfx.io/javadoc/" target="_blank">JavaFX – Javadoc <small>(EN)</small></a>
+    <div class="panel">
+      <h3>📝 Ghi chú cá nhân</h3>
+      <div class="panel-body">
+        <div class="meta">Liên kết hiện tại: <span id="noteLink" class="meta">—</span></div>
+        <textarea id="noteArea" class="note-area" placeholder="Viết ghi chú cho tài liệu này…"></textarea>
+        <div class="row" style="margin-top:8px">
+          <button id="saveNote" class="btn">Lưu ghi chú</button>
+          <button id="delNote" class="btn" style="color:var(--danger)">Xóa ghi chú</button>
+        </div>
+      </div>
     </div>
-  </details>
-
-  <!-- Go (Golang) -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🐹</span><span>Go (Golang) — <span class="hint">Ngôn ngữ & thư viện</span></span></div>
-      <span class="badge">EN</span>
-    </summary>
-    <div class="links">
-      <a href="https://go.dev/doc/" target="_blank">Go – Official Docs <small>(EN)</small></a>
-      <a href="https://pkg.go.dev/std" target="_blank">Go – Standard Library API <small>(EN)</small></a>
-      <a href="https://go.dev/doc/effective_go" target="_blank">Effective Go <small>(EN)</small></a>
-      <a href="https://gin-gonic.com/docs/" target="_blank">Gin – Docs <small>(EN)</small></a>
-      <a href="https://gorm.io/docs/" target="_blank">GORM – Docs <small>(EN)</small></a>
-      <a href="https://cobra.dev/" target="_blank">Cobra – CLI Framework Docs <small>(EN)</small></a>
-      <a href="https://pkg.go.dev/github.com/spf13/viper" target="_blank">Viper – Config Docs <small>(EN)</small></a>
-      <a href="https://gobyexample.com/" target="_blank">Go by Example <small>(EN)</small></a>
-    </div>
-  </details>
-
-  <!-- HTML / CSS / Web APIs -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🌐</span><span>HTML / CSS / Web APIs — <span class="hint">Chuẩn & Tài liệu</span></span></div>
-      <span class="badge">EN + VI</span>
-    </summary>
-    <div class="links">
-      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN – HTML <small>(EN)</small></a>
-      <a href="https://developer.mozilla.org/vi/docs/Web/HTML" target="_blank">MDN – HTML <small>(VI)</small></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN – CSS <small>(EN)</small></a>
-      <a href="https://developer.mozilla.org/vi/docs/Web/CSS" target="_blank">MDN – CSS <small>(VI)</small></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN – JavaScript <small>(EN)</small></a>
-      <a href="https://developer.mozilla.org/vi/docs/Web/JavaScript" target="_blank">MDN – JavaScript <small>(VI)</small></a>
-      <a href="https://html.spec.whatwg.org/" target="_blank">WHATWG – HTML Living Standard <small>(EN)</small></a>
-      <a href="https://www.w3.org/Style/CSS/specs.en.html" target="_blank">W3C – CSS Specifications <small>(EN)</small></a>
-      <a href="https://caniuse.com/" target="_blank">Can I Use – Browser Support <small>(EN)</small></a>
-      <a href="https://fetch.spec.whatwg.org/" target="_blank">WHATWG – Fetch Standard <small>(EN)</small></a>
-      <a href="https://tc39.es/ecma262/" target="_blank">ECMAScript (TC39) – Language Spec <small>(EN)</small></a>
-    </div>
-  </details>
-
-  <!-- Tools & Dev Utilities -->
-  <details class="group">
-    <summary>
-      <div class="group-title"><span class="icon">🧩</span><span>Tools & Dev Utilities — <span class="hint">Công cụ phát triển</span></span></div>
-      <span class="badge">EN</span>
-    </summary>
-    <div class="links">
-      <a href="https://git-scm.com/docs" target="_blank">Git – Documentation <small>(EN)</small></a>
-      <a href="https://docs.github.com/en" target="_blank">GitHub – Docs <small>(EN)</small></a>
-      <a href="https://nodejs.org/en/docs" target="_blank">Node.js – Docs <small>(EN)</small></a>
-      <a href="https://pnpm.io/motivation" target="_blank">pnpm – Docs <small>(EN)</small></a>
-      <a href="https://yarnpkg.com/getting-started" target="_blank">Yarn – Docs <small>(EN)</small></a>
-      <a href="https://eslint.org/docs/latest/" target="_blank">ESLint – Docs <small>(EN)</small></a>
-      <a href="https://prettier.io/docs/en/" target="_blank">Prettier – Docs <small>(EN)</small></a>
-      <a href="https://webpack.js.org/concepts/" target="_blank">Webpack – Concepts <small>(EN)</small></a>
-      <a href="https://rollupjs.org/introduction/" target="_blank">Rollup – Docs <small>(EN)</small></a>
-      <a href="https://vitejs.dev/guide/" target="_blank">Vite – Guide <small>(EN)</small></a>
-    </div>
-  </details>
+  </aside>
 </main>
-<footer>
-  Cập nhật: 2025-10-08 20:29:26. • Giao diện kiểu GitHub • Chế độ Auto/Light/Dark • Tìm kiếm realtime • Thu gọn / Mở rộng nhóm.
-</footer>
+
+<div class="tooltip" id="tooltip"></div>
 
 <script>
-(function() {
-  const html = document.documentElement;
-  const themeBtn = document.getElementById('themeBtn');
-  const themeState = document.getElementById('themeState');
+(function(){
+  const TODAY = "2025-10-09 06:40:24";
+  const THEME_KEY = "devdocs.theme";
+  const FAV_KEY = "devdocs.favs";
+  const NOTES_KEY = "devdocs.notes";
+  const DATA_KEY = "devdocs.index"; // allow import/merge later
+
+  const themeSelect = document.getElementById('themeSelect');
   const searchInput = document.getElementById('searchInput');
+  const suggestList = document.getElementById('suggestList');
+  const groupFilter = document.getElementById('groupFilter');
+  const typeFilter = document.getElementById('typeFilter');
   const expandAllBtn = document.getElementById('expandAll');
   const collapseAllBtn = document.getElementById('collapseAll');
-  const groups = Array.from(document.querySelectorAll('details.group'));
-  const LINKS_SELECTOR = '.links a';
+  const printBtn = document.getElementById('printBtn');
+  const exportJsonBtn = document.getElementById('exportJson');
+  const exportMdBtn = document.getElementById('exportMd');
+  const importJsonInput = document.getElementById('importJson');
+  const groupsRoot = document.getElementById('groups');
+  const statTotal = document.getElementById('stat-total');
+  const statEN = document.getElementById('stat-en');
+  const statVI = document.getElementById('stat-vi');
+  const statFav = document.getElementById('stat-fav');
+  const previewToggle = document.getElementById('previewToggle');
+  const previewFrame = document.getElementById('previewFrame');
+  const tooltip = document.getElementById('tooltip');
+  const noteArea = document.getElementById('noteArea');
+  const noteLink = document.getElementById('noteLink');
+  const saveNoteBtn = document.getElementById('saveNote');
+  const delNoteBtn = document.getElementById('delNote');
 
-  const THEME_KEY = 'devdocs_theme_mode'; // 'auto' | 'light' | 'dark'
-  const STATE = {
-    mode: localStorage.getItem(THEME_KEY) || 'auto'
+  /* ---------- Data: groups and items ---------- */
+  // Each item: { t: "Title", url, lang: "EN|VI", type: "official|framework|library|tool|spec|api|guide", desc, tags:[...], group:"React" }
+  const DATA = { groups: [
+    { name: "React", icon: "⚛️", subtitle: "Hệ sinh thái React", items: [
+      {t:"React – Official Docs", url:"https://react.dev", lang:"EN", type:"official", desc:"React official documentation.", tags:["react","official"]},
+      {t:"React – Legacy Docs", url:"https://legacy.reactjs.org", lang:"EN", type:"guide", desc:"Legacy docs for React 17 and below.", tags:["react","legacy"]},
+      {t:"React – Vietnamese Docs", url:"https://vi.reactjs.org/", lang:"VI", type:"guide", desc:"Bản dịch tiếng Việt (nếu còn).", tags:["react","vi"]},
+      {t:"Next.js – Docs", url:"https://nextjs.org/docs", lang:"EN", type:"framework", desc:"React framework for production.", tags:["nextjs","framework"]},
+      {t:"Redux Toolkit – Docs", url:"https://redux-toolkit.js.org", lang:"EN", type:"library", desc:"Official Redux Toolkit.", tags:["redux","state"]},
+      {t:"React Router – Docs", url:"https://reactrouter.com/en/main", lang:"EN", type:"library", desc:"Routing for React apps.", tags:["router","spa"]},
+      {t:"TanStack Query – Docs", url:"https://tanstack.com/query/latest/docs/react", lang:"EN", type:"library", desc:"Data fetching & caching.", tags:["query","data"]},
+      {t:"TypeScript – Docs", url:"https://www.typescriptlang.org/docs/", lang:"EN", type:"guide", desc:"Typed superset of JS.", tags:["typescript","ts"]},
+      {t:"Vite – Guide", url:"https://vitejs.dev/guide/", lang:"EN", type:"tool", desc:"Frontend tooling & dev server.", tags:["vite","build"]},
+      {t:"Babel – Docs", url:"https://babeljs.io/docs/", lang:"EN", type:"tool", desc:"JS compiler.", tags:["babel","compiler"]},
+    ]},
+    { name: "Tailwind", icon: "🎨", subtitle: "Thư viện giao diện", items: [
+      {t:"Tailwind CSS – Docs", url:"https://tailwindcss.com/docs", lang:"EN", type:"official", desc:"Utility-first CSS framework.", tags:["tailwind","css"]},
+      {t:"Tailwind CSS – Tiếng Việt", url:"https://v1.tailwindcss.vn/docs", lang:"VI", type:"guide", desc:"Bản dịch community.", tags:["tailwind","vi"]},
+      {t:"shadcn/ui – Docs", url:"https://ui.shadcn.com", lang:"EN", type:"library", desc:"Headless + Tailwind component.", tags:["shadcn","ui"]},
+      {t:"daisyUI – Components", url:"https://daisyui.com/components/", lang:"EN", type:"library", desc:"Tailwind components.", tags:["daisyui","ui"]},
+      {t:"Flowbite – Docs", url:"https://flowbite.com/docs/", lang:"EN", type:"library", desc:"Tailwind components kit.", tags:["flowbite","ui"]},
+      {t:"Headless UI – Docs", url:"https://headlessui.com", lang:"EN", type:"library", desc:"Unstyled UI primitives.", tags:["headlessui","ui"]},
+    ]},
+    { name: "Python", icon: "🐍", subtitle: "Ngôn ngữ & ML", items: [
+      {t:"Python – Official Docs", url:"https://docs.python.org/3/", lang:"EN", type:"official", desc:"Python language and stdlib.", tags:["python","official"]},
+      {t:"Python – Tiếng Việt", url:"https://docs.python.org/vi/3/", lang:"VI", type:"guide", desc:"Bản dịch tiếng Việt.", tags:["python","vi"]},
+      {t:"PyPI – Packages", url:"https://pypi.org/", lang:"EN", type:"api", desc:"Python Package Index.", tags:["pypi","packages"]},
+      {t:"NumPy – Docs", url:"https://numpy.org/doc/", lang:"EN", type:"library", desc:"Numerical computing.", tags:["numpy","math"]},
+      {t:"Pandas – Docs", url:"https://pandas.pydata.org/docs/", lang:"EN", type:"library", desc:"Data analysis.", tags:["pandas","data"]},
+      {t:"scikit-learn – Docs", url:"https://scikit-learn.org/stable/", lang:"EN", type:"library", desc:"Machine learning.", tags:["sklearn","ml"]},
+      {t:"Matplotlib – Docs", url:"https://matplotlib.org/stable/contents.html", lang:"EN", type:"library", desc:"Plotting.", tags:["matplotlib","plot"]},
+      {t:"Flask – Docs", url:"https://flask.palletsprojects.com/en/stable/", lang:"EN", type:"framework", desc:"Micro web framework.", tags:["flask","web"]},
+      {t:"Django – Docs", url:"https://docs.djangoproject.com/en/stable/", lang:"EN", type:"framework", desc:"Full-stack web framework.", tags:["django","web"]},
+      {t:"FastAPI – Docs", url:"https://fastapi.tiangolo.com/", lang:"EN", type:"framework", desc:"High-performance APIs.", tags:["fastapi","api"]},
+      {t:"Hitchhiker’s Guide to Python", url:"https://docs.python-guide.org/", lang:"EN", type:"guide", desc:"Best practices.", tags:["guide","best-practice"]},
+    ]},
+    { name: "C#", icon: "🧱", subtitle: "Nền tảng .NET", items: [
+      {t:"C# – Microsoft Learn", url:"https://learn.microsoft.com/en-us/dotnet/csharp/", lang:"EN", type:"official", desc:"Language guide.", tags:["csharp","official"]},
+      {t:".NET – API Reference", url:"https://learn.microsoft.com/en-us/dotnet/api/", lang:"EN", type:"api", desc:".NET API surfaces.", tags:["dotnet","api"]},
+      {t:"ASP.NET Core – Docs", url:"https://learn.microsoft.com/en-us/aspnet/core", lang:"EN", type:"framework", desc:"Web with .NET.", tags:["aspnet","web"]},
+      {t:"Entity Framework Core – Docs", url:"https://learn.microsoft.com/en-us/ef/core/", lang:"EN", type:"library", desc:"ORM for .NET.", tags:["efcore","orm"]},
+      {t:"WinForms – Docs", url:"https://learn.microsoft.com/en-us/dotnet/desktop/winforms/", lang:"EN", type:"framework", desc:"Windows Forms.", tags:["winforms","desktop"]},
+      {t:"Blazor – Docs", url:"https://learn.microsoft.com/en-us/aspnet/core/blazor/", lang:"EN", type:"framework", desc:"Web UI with .NET.", tags:["blazor","web"]},
+      {t:"LINQ – Docs", url:"https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/", lang:"EN", type:"guide", desc:"Language Integrated Query.", tags:["linq","query"]},
+      {t:"NuGet – Packages", url:"https://www.nuget.org/", lang:"EN", type:"api", desc:".NET packages.", tags:["nuget","packages"]},
+    ]},
+    { name: "Java", icon: "☕", subtitle: "Hệ sinh thái Java", items: [
+      {t:"Java SE – Docs", url:"https://docs.oracle.com/en/java/javase/", lang:"EN", type:"official", desc:"Java SE documentation.", tags:["java","official"]},
+      {t:"The Java Tutorials", url:"https://docs.oracle.com/javase/tutorial/", lang:"EN", type:"guide", desc:"Official tutorials.", tags:["java","tutorial"]},
+      {t:"Spring Framework – Reference", url:"https://docs.spring.io/spring-framework/reference/", lang:"EN", type:"framework", desc:"Spring core.", tags:["spring","framework"]},
+      {t:"Spring Boot – Reference", url:"https://docs.spring.io/spring-boot/docs/current/reference/html/", lang:"EN", type:"framework", desc:"Spring Boot.", tags:["spring-boot","framework"]},
+      {t:"Hibernate ORM – Docs", url:"https://hibernate.org/orm/documentation/", lang:"EN", type:"library", desc:"Popular Java ORM.", tags:["hibernate","orm"]},
+      {t:"Maven – Guides", url:"https://maven.apache.org/guides/", lang:"EN", type:"tool", desc:"Build automation.", tags:["maven","build"]},
+      {t:"Gradle – User Guide", url:"https://docs.gradle.org/current/userguide/userguide.html", lang:"EN", type:"tool", desc:"Build tool.", tags:["gradle","build"]},
+      {t:"JavaFX – Javadoc", url:"https://openjfx.io/javadoc/", lang:"EN", type:"api", desc:"JavaFX API.", tags:["javafx","ui"]},
+    ]},
+    { name: "Go", icon: "🐹", subtitle: "Ngôn ngữ & thư viện", items: [
+      {t:"Go – Official Docs", url:"https://go.dev/doc/", lang:"EN", type:"official", desc:"Go language docs.", tags:["go","official"]},
+      {t:"Go – Standard Library API", url:"https://pkg.go.dev/std", lang:"EN", type:"api", desc:"Std library.", tags:["stdlib"]},
+      {t:"Effective Go", url:"https://go.dev/doc/effective_go", lang:"EN", type:"guide", desc:"Idiomatic Go.", tags:["style","best-practice"]},
+      {t:"Gin – Docs", url:"https://gin-gonic.com/docs/", lang:"EN", type:"framework", desc:"Go web framework.", tags:["gin","web"]},
+      {t:"GORM – Docs", url:"https://gorm.io/docs/", lang:"EN", type:"library", desc:"ORM for Go.", tags:["gorm","orm"]},
+      {t:"Cobra – CLI Framework", url:"https://cobra.dev/", lang:"EN", type:"library", desc:"CLI toolkit.", tags:["cobra","cli"]},
+      {t:"Viper – Config", url:"https://pkg.go.dev/github.com/spf13/viper", lang:"EN", type:"library", desc:"Config for Go.", tags:["viper","config"]},
+      {t:"Go by Example", url:"https://gobyexample.com/", lang:"EN", type:"guide", desc:"Annotated examples.", tags:["examples"]},
+    ]},
+    { name: "Web", icon: "🌐", subtitle: "Chuẩn & Tài liệu", items: [
+      {t:"MDN – HTML (EN)", url:"https://developer.mozilla.org/en-US/docs/Web/HTML", lang:"EN", type:"guide", desc:"HTML reference and guides.", tags:["mdn","html"]},
+      {t:"MDN – HTML (VI)", url:"https://developer.mozilla.org/vi/docs/Web/HTML", lang:"VI", type:"guide", desc:"Tài liệu HTML tiếng Việt.", tags:["mdn","html","vi"]},
+      {t:"MDN – CSS (EN)", url:"https://developer.mozilla.org/en-US/docs/Web/CSS", lang:"EN", type:"guide", desc:"CSS reference and guides.", tags:["mdn","css"]},
+      {t:"MDN – CSS (VI)", url:"https://developer.mozilla.org/vi/docs/Web/CSS", lang:"VI", type:"guide", desc:"Tài liệu CSS tiếng Việt.", tags:["mdn","css","vi"]},
+      {t:"MDN – JavaScript (EN)", url:"https://developer.mozilla.org/en-US/docs/Web/JavaScript", lang:"EN", type:"guide", desc:"JavaScript docs.", tags:["mdn","js"]},
+      {t:"MDN – JavaScript (VI)", url:"https://developer.mozilla.org/vi/docs/Web/JavaScript", lang:"VI", type:"guide", desc:"Tài liệu JS tiếng Việt.", tags:["mdn","js","vi"]},
+      {t:"WHATWG – HTML Living Standard", url:"https://html.spec.whatwg.org/", lang:"EN", type:"spec", desc:"HTML living standard.", tags:["whatwg","html","spec"]},
+      {t:"W3C – CSS Specifications", url:"https://www.w3.org/Style/CSS/specs.en.html", lang:"EN", type:"spec", desc:"CSS specs.", tags:["w3c","css","spec"]},
+      {t:"Can I Use – Browser Support", url:"https://caniuse.com/", lang:"EN", type:"tool", desc:"Browser compatibility.", tags:["compat","browser"]},
+      {t:"WHATWG – Fetch Standard", url:"https://fetch.spec.whatwg.org/", lang:"EN", type:"spec", desc:"Fetch standard.", tags:["fetch","spec"]},
+      {t:"ECMAScript (TC39) – Spec", url:"https://tc39.es/ecma262/", lang:"EN", type:"spec", desc:"JS language specification.", tags:["ecmascript","spec"]},
+    ]},
+    { name: "Tools", icon: "🧩", subtitle: "Công cụ phát triển", items: [
+      {t:"Git – Documentation", url:"https://git-scm.com/docs", lang:"EN", type:"guide", desc:"Git manual and guides.", tags:["git","vcs"]},
+      {t:"GitHub – Docs", url:"https://docs.github.com/en", lang:"EN", type:"guide", desc:"GitHub documentation.", tags:["github"]},
+      {t:"Node.js – Docs", url:"https://nodejs.org/en/docs", lang:"EN", type:"guide", desc:"Node.js documentation.", tags:["node","js"]},
+      {t:"pnpm – Docs", url:"https://pnpm.io/motivation", lang:"EN", type:"guide", desc:"Fast package manager.", tags:["pnpm","packages"]},
+      {t:"Yarn – Docs", url:"https://yarnpkg.com/getting-started", lang:"EN", type:"guide", desc:"Yarn package manager.", tags:["yarn","packages"]},
+      {t:"ESLint – Docs", url:"https://eslint.org/docs/latest/", lang:"EN", type:"guide", desc:"Linting for JS/TS.", tags:["eslint","lint"]},
+      {t:"Prettier – Docs", url:"https://prettier.io/docs/en/", lang:"EN", type:"guide", desc:"Code formatter.", tags:["prettier","format"]},
+      {t:"Webpack – Concepts", url:"https://webpack.js.org/concepts/", lang:"EN", type:"guide", desc:"Module bundler concepts.", tags:["webpack","bundler"]},
+      {t:"Rollup – Docs", url:"https://rollupjs.org/introduction/", lang:"EN", type:"guide", desc:"Bundler and build.", tags:["rollup","bundler"]},
+      {t:"Vite – Guide", url:"https://vitejs.dev/guide/", lang:"EN", type:"guide", desc:"Next-gen frontend tooling.", tags:["vite","build"]},
+    ]},
+  ]};
+
+  /* ---------- State ---------- */
+  const state = {
+    theme: localStorage.getItem(THEME_KEY) || 'auto',
+    favorites: JSON.parse(localStorage.getItem(FAV_KEY) || "[]"),
+    notes: JSON.parse(localStorage.getItem(NOTES_KEY) || "{}"),
+    openInPreview: false,
+    currentLink: null,
+    data: JSON.parse(localStorage.getItem(DATA_KEY) || "null") || DATA, // allow persisted index
   };
 
-  function applyTheme() {
-    if (STATE.mode === 'auto') {
-      html.removeAttribute('data-theme');
-    } else {
-      html.setAttribute('data-theme', STATE.mode);
-    }
-    themeState.textContent = STATE.mode.charAt(0).toUpperCase() + STATE.mode.slice(1);
-    localStorage.setItem(THEME_KEY, STATE.mode);
+  // Apply theme
+  function applyTheme(){
+    document.documentElement.setAttribute('data-theme', state.theme);
+    themeSelect.value = state.theme;
+    localStorage.setItem(THEME_KEY, state.theme);
   }
-
-  function cycleTheme() {
-    STATE.mode = STATE.mode === 'auto' ? 'light' : STATE.mode === 'light' ? 'dark' : 'auto';
-    applyTheme();
-  }
-
-  themeBtn.addEventListener('click', cycleTheme);
+  themeSelect.addEventListener('change', ()=>{ state.theme = themeSelect.value; applyTheme();});
   applyTheme();
 
-  // Search filter (realtime)
-  function normalize(str) {
-    return (str || '').toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // remove accents
-  }
+  // Build groups UI
+  function buildGroups(){
+    groupsRoot.innerHTML = "";
+    const frag = document.createDocumentFragment();
+    state.data.groups.forEach(group => {
+      const det = document.createElement('details');
+      det.className = "group";
+      det.open = true;
 
-  function performSearch(q) {
-    const needle = normalize(q);
-    const allLinks = Array.from(document.querySelectorAll(LINKS_SELECTOR));
-    let matchCount = 0;
-    allLinks.forEach(a => {
-      const hay = normalize(a.textContent + ' ' + a.getAttribute('href'));
-      const hit = !needle || hay.includes(needle);
-      a.classList.toggle('hidden', !hit);
-      if (hit) matchCount++;
-    });
-    // Auto open groups with matches; close groups with none (only when searching)
-    if (needle) {
-      groups.forEach(g => {
-        const anyVisible = Array.from(g.querySelectorAll(LINKS_SELECTOR)).some(x => !x.classList.contains('hidden'));
-        g.open = anyVisible;
+      const summary = document.createElement('summary');
+      const left = document.createElement('div');
+      left.className = "gtitle";
+      left.innerHTML = `<span>${group.icon}</span><span>${group.name} — <span class="meta">${group.subtitle}</span></span>`;
+      const badge = document.createElement('span');
+      badge.className = "badge";
+      const viCount = group.items.filter(i=>i.lang==="VI").length;
+      badge.textContent = (viCount>0? "EN + VI" : "EN");
+      summary.appendChild(left);
+      summary.appendChild(badge);
+      det.appendChild(summary);
+
+      const links = document.createElement('div');
+      links.className = "links";
+
+      group.items.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "item";
+        row.dataset.group = group.name;
+        row.dataset.type = item.type;
+        row.dataset.lang = item.lang;
+        row.dataset.url = item.url;
+        row.dataset.title = item.t;
+        row.dataset.tags = (item.tags || []).join(",");
+
+        const star = document.createElement('span');
+        star.className = "star";
+        star.textContent = state.favorites.includes(item.url) ? "⭐" : "☆";
+        if (state.favorites.includes(item.url)) star.classList.add('active');
+        star.title = "Thêm/Bỏ yêu thích";
+        star.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          toggleFavorite(item.url, star);
+        });
+
+        const a = document.createElement('a');
+        a.href = item.url; a.target = "_blank";
+        a.textContent = item.t + (item.lang ? ` (${item.lang})` : "");
+        a.title = item.desc || "";
+        a.addEventListener('click', (e)=>{
+          if (state.openInPreview || e.shiftKey){
+            e.preventDefault();
+            openInPreview(item.url);
+            setCurrentNoteLink(item.url, item.t);
+          }else{
+            setCurrentNoteLink(item.url, item.t);
+          }
+        });
+        a.addEventListener('mouseenter', (e)=> showTooltip(e, item));
+        a.addEventListener('mouseleave', hideTooltip);
+
+        const meta = document.createElement('span');
+        meta.className = 'meta';
+        meta.textContent = `• ${item.type}`;
+
+        row.appendChild(star);
+        row.appendChild(a);
+        row.appendChild(meta);
+        links.appendChild(row);
       });
-    }
-    return matchCount;
+
+      det.appendChild(links);
+      frag.appendChild(det);
+    });
+    groupsRoot.appendChild(frag);
+    updateStats();
+    buildSuggestions();
   }
 
-  searchInput.addEventListener('input', (e) => performSearch(e.target.value));
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/') {
-      e.preventDefault();
-      searchInput.focus();
+  function updateStats(){
+    const all = Array.from(groupsRoot.querySelectorAll('.item'));
+    const total = all.length;
+    const en = all.filter(x=>x.dataset.lang==="EN").length;
+    const vi = all.filter(x=>x.dataset.lang==="VI").length;
+    const fav = state.favorites.length;
+    statTotal.textContent = `Tổng link: ${total}`;
+    statEN.textContent = `EN: ${en}`;
+    statVI.textContent = `VI: ${vi}`;
+    statFav.textContent = `⭐ Favorites: ${fav}`;
+  }
+
+  function buildSuggestions(){
+    suggestList.innerHTML = "";
+    const set = new Set();
+    state.data.groups.forEach(g => g.items.forEach(i => {
+      set.add(i.t); (i.tags||[]).forEach(t=>set.add(t)); set.add(g.name);
+    }));
+    [...set].sort().forEach(x=>{
+      const opt = document.createElement('option'); opt.value = x; suggestList.appendChild(opt);
+    });
+  }
+
+  // Favorites
+  function toggleFavorite(url, el){
+    const idx = state.favorites.indexOf(url);
+    if (idx === -1) state.favorites.push(url); else state.favorites.splice(idx,1);
+    localStorage.setItem(FAV_KEY, JSON.stringify(state.favorites));
+    el.textContent = state.favorites.includes(url) ? "⭐" : "☆";
+    el.classList.toggle('active', state.favorites.includes(url));
+    updateStats();
+    applyFilters(); // refresh Favorites view
+  }
+
+  // Tooltip
+  function showTooltip(e, item){
+    tooltip.textContent = item.desc || '';
+    if (!tooltip.textContent) return;
+    tooltip.style.display = 'block';
+    const pad = 10;
+    tooltip.style.left = (e.pageX + pad) + 'px';
+    tooltip.style.top = (e.pageY + pad) + 'px';
+  }
+  function hideTooltip(){ tooltip.style.display = 'none'; }
+
+  // Preview
+  function openInPreview(url){
+    previewFrame.classList.remove('hidden');
+    previewFrame.src = url;
+  }
+  previewToggle.addEventListener('change', ()=>{
+    state.openInPreview = previewToggle.checked;
+    if (!state.openInPreview) previewFrame.classList.add('hidden');
+  });
+  document.addEventListener('keydown',(e)=>{
+    if (e.shiftKey && (e.key === 'O' || e.key === 'o')){
+      previewToggle.checked = !previewToggle.checked;
+      previewToggle.dispatchEvent(new Event('change'));
     }
   });
 
-  // Expand / Collapse
-  expandAllBtn.addEventListener('click', () => { groups.forEach(g => g.open = true); });
-  collapseAllBtn.addEventListener('click', () => { groups.forEach(g => g.open = false); });
+  function setCurrentNoteLink(url, title){
+    state.currentLink = url;
+    noteLink.textContent = title || url || "—";
+    noteArea.value = (state.notes[url] || "");
+  }
+  saveNoteBtn.addEventListener('click', ()=>{
+    if (!state.currentLink) return alert("Hãy mở một liên kết trước đã.");
+    state.notes[state.currentLink] = noteArea.value || "";
+    localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes));
+    alert("Đã lưu ghi chú.");
+  });
+  delNoteBtn.addEventListener('click', ()=>{
+    if (!state.currentLink) return;
+    delete state.notes[state.currentLink];
+    localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes));
+    noteArea.value = "";
+    alert("Đã xóa ghi chú.");
+  });
 
-  // Initial state
-  performSearch('');
+  // Search & Filters
+  function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function applyFilters(){
+    const q = normalize(searchInput.value);
+    const g = groupFilter.value;
+    const tp = typeFilter.value;
+    const items = Array.from(groupsRoot.querySelectorAll('.item'));
+    items.forEach(it=>{
+      const title = normalize(it.dataset.title + " " + it.dataset.tags + " " + it.dataset.url + " " + it.dataset.group + " " + it.dataset.type + " " + it.dataset.lang);
+      let hit = (!q || title.includes(q));
+      if (g) {
+        if (g === "Favorites") hit = hit && state.favorites.includes(it.dataset.url);
+        else hit = hit && it.dataset.group === g;
+      }
+      if (tp) hit = hit && it.dataset.type === tp;
+      it.style.display = hit ? "flex" : "none";
+    });
+    // auto open groups with visible items
+    Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=>{
+      const any = Array.from(d.querySelectorAll('.item')).some(x => x.style.display !== 'none');
+      d.open = any;
+      d.classList.toggle('hidden', !any);
+    });
+  }
+  searchInput.addEventListener('input', applyFilters);
+  groupFilter.addEventListener('change', applyFilters);
+  typeFilter.addEventListener('change', applyFilters);
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === '/'){ e.preventDefault(); searchInput.focus(); }
+  });
 
-})();
-</script>
+  // Expand/Collapse
+  expandAllBtn.addEventListener('click', ()=>{
+    Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=>{ d.open = true; d.classList.remove('hidden'); });
+  });
+  collapseAllBtn.addEventListener('click', ()=>{
+    Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=> d.open = false);
+  });
+
+  // Export
+  printBtn.addEventListener('click', ()=> window.print());
+  function download(filename, text, type="text/plain"){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], {type}));
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  exportJsonBtn.addEventListener('click', ()=>{
+    download('devdocs-index.json', JSON.stringify(state.data, null, 2), 'application/json');
+  });
+  exportMdBtn.addEventListener('click', ()=>{
+    let md = `# DevDocs Portal (EN–VI)\nCập nhật: $2025-10-09 06:40:24\n\n`;
+    state.data.groups.forEach(g=>{
+      md += `## ${g.name} — ${g.subtitle}\n\n`;
+      g.items.forEach(i=>{
+        md += `- [${i.t}](${i.url}) — ${i.type}${i.lang? ' · ' + i.lang : ''}\n`;
+      });
+      md += `\n`;
+    });
+    download('devdocs-links.md', md, 'text/markdown');
+  });
+
+  // Import (merge)
+  importJsonInput.addEventListener('change', async (e)=>{
+    const f = e.target.files[0]; if (!f) return;
+    const text = await f.text();
+    try{
+      const incoming = JSON.parse(text);
+      mergeData(incoming);
+      localStorage.setItem(DATA_KEY, JSON.stringify(state.data));
+      buildGroups();
+      applyFilters();
+      alert("Đã nhập & hợp nhất JSON tài liệu.");
+    }catch(err){ alert("File JSON không hợp lệ."); }
+    importJsonInput.value = "";
+  });
+  function mergeData(incoming){
+    const mapGroup = new Map(state.data.groups.map(g=>[g.name,g]));
+    (incoming.groups||[]).forEach(g=>{
+      if (!mapGroup.has(g.name)){
+        state.data.groups.push(g);
+      }else{
+        const tgt = mapGroup.get(g.name);
+        const urls = new Set(tgt.items.map(i=>i.url));
+        (g.items||[]).forEach(i=>{
+          if (!urls.has(i.url)){ tgt.items.push(i); urls.add(i.url); }
+        });
+      }
+    });
+  }
+
+  // Init
+  buildGroups();
+  applyFilters();
+
+})();</script>
 </body>
 </html>

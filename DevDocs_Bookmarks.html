@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DevDocs Portal — EN–VI (v3)</title>
+<title>DevDocs Portal — EN–VI (v3.5)</title>
 <meta name="description" content="Cổng tri thức lập trình song ngữ, VS Code-style, PWA offline.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Crect width='100%25' height='100%25' rx='24' ry='24' fill='%231f6feb'/%3E%3Ctext x='50%25' y='57%25' text-anchor='middle' font-family='Inter, Arial' font-size='70' fill='white'%3EDD%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#1f6feb"/>
@@ -22,15 +22,12 @@
       --code-bg:#0d1117; --code-fg:#c9d1d9; --sidebar:#0f141b; --sidebar-border:#22272e;
     }
   }
-
   html[data-theme="light"]{ --bg:#ffffff; --fg:#24292e; --muted:#57606a; --card:#f6f8fa; --link:#0969da; --border:#d0d7de; --accent:#1f6feb; --shadow:rgba(27,31,35,0.08); --glass:rgba(246,248,250,0.75); --code-bg:#f6f8fa; --code-fg:#24292e; --sidebar:#f3f4f6; --sidebar-border:#e5e7eb;}
   html[data-theme="dark"]{ --bg:#0d1117; --fg:#c9d1d9; --muted:#8b949e; --card:#161b22; --link:#58a6ff; --border:#30363d; --accent:#1f6feb; --shadow:rgba(1,4,9,0.35); --glass:rgba(13,17,23,0.55); --code-bg:#0d1117; --code-fg:#c9d1d9; --sidebar:#0f141b; --sidebar-border:#22272e;}
   html[data-theme="vscode"]{ --bg:#0e1114; --fg:#d4d4d4; --muted:#9da3ae; --card:#11151a; --link:#4fc1ff; --border:#2a2f36; --accent:#3ea6ff; --shadow:rgba(0,0,0,0.35); --glass:rgba(17,21,26,0.55); --code-bg:#0b0f14; --code-fg:#d4d4d4; --sidebar:#0c1015; --sidebar-border:#20242a;}
   html[data-theme="hacker"]{ --bg:#050505; --fg:#d0ffd0; --muted:#80c080; --card:#0a0f0a; --link:#00ff99; --border:#113311; --accent:#00e676; --shadow:rgba(0,255,153,0.15); --glass:rgba(10,15,10,0.55); --code-bg:#0a0f0a; --code-fg:#d0ffd0; --sidebar:#070d07; --sidebar-border:#0e1d0e;}
   html[data-theme="solarized"]{ --bg:#fdf6e3; --fg:#073642; --muted:#657b83; --card:#eee8d5; --link:#268bd2; --border:#d3c6a6; --accent:#2aa198; --shadow:rgba(0,0,0,0.08); --glass:rgba(253,246,227,0.7); --code-bg:#eee8d5; --code-fg:#073642; --sidebar:#f3ecd3; --sidebar-border:#e3d7b3;}
   html[data-theme="monokai"]{ --bg:#272822; --fg:#f8f8f2; --muted:#a6e22e; --card:#2d2e28; --link:#66d9ef; --border:#3c3d36; --accent:#fd971f; --shadow:rgba(0,0,0,0.4); --glass:rgba(39,40,34,0.65); --code-bg:#2d2e28; --code-fg:#f8f8f2; --sidebar:#22231e; --sidebar-border:#35362f;}
-
-  /* New themes */
   html[data-theme="dracula"]{ --bg:#282a36; --fg:#f8f8f2; --muted:#bd93f9; --card:#2f3241; --link:#8be9fd; --border:#3b3e4c; --accent:#ff79c6; --shadow:rgba(0,0,0,0.45); --glass:rgba(40,42,54,0.6); --code-bg:#2f3241; --code-fg:#f8f8f2; --sidebar:#222433; --sidebar-border:#34364a;}
   html[data-theme="nord"]{ --bg:#2e3440; --fg:#eceff4; --muted:#81a1c1; --card:#3b4252; --link:#88c0d0; --border:#434c5e; --accent:#5e81ac; --shadow:rgba(0,0,0,0.45); --glass:rgba(46,52,64,0.6); --code-bg:#3b4252; --code-fg:#eceff4; --sidebar:#2b303b; --sidebar-border:#3b4252;}
 
@@ -46,7 +43,7 @@
   a{ color:var(--link); text-decoration:none; transition: color .2s ease }
   .btn,.select{
     appearance:none; border:1px solid var(--border); background:var(--card); color:var(--fg);
-    padding:8px 10px; border-radius:10px; font-size:14px; cursor:pointer; transition:border-color .2s ease, transform .08s ease;
+    padding:8px 10px; border-radius:10px; font-size:14px; cursor:pointer; transition:border-color .2s ease, transform .08s ease, background-color .2s ease, color .2s ease;
   }
   .btn:hover,.select:hover{ border-color:var(--muted) }
   .btn:active{ transform:translateY(1px) }
@@ -83,7 +80,7 @@
   .s-title{ font-size:13px; color:var(--muted); margin:6px 8px }
   .group-btn{
     width:100%; text-align:left; background:transparent; border:1px solid transparent; border-radius:8px;
-    padding:8px 10px; display:flex; align-items:center; gap:8px; color:var(--fg); cursor:pointer;
+    padding:8px 10px; display:flex; align-items:center; gap:8px; color:var(--fg); cursor:pointer; transition: background .2s ease, border-color .2s ease, transform .08s ease;
   }
   .group-btn.active, .group-btn:hover{ background:var(--card); border-color:var(--border) }
 
@@ -124,11 +121,13 @@
   .stats{ display:flex; flex-wrap:wrap; gap:8px }
   .stat{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:8px 10px; font-size:12px }
 
-  /* Zen floating button */
+  /* ===== Zen floating button ===== */
   #zenBtn{
-    position: fixed; right: 12px; bottom: 12px; z-index: 100;
-    background: var(--accent); color:white; border:none; box-shadow:0 4px 16px var(--shadow);
+    position: fixed; right: 16px; bottom: 16px; z-index: 100;
+    width:48px; height:48px; border-radius:999px;
+    background: var(--accent); color:white; border:none; box-shadow:0 8px 24px var(--shadow); font-size:18px;
   }
+  #zenBtn:hover{ transform: translateY(-1px); }
   body.zen header, body.zen .toolbar, body.zen .right{ display:none !important }
   body.zen .app{ grid-template-columns: 260px 1fr; }
   body.zen #zenBtn{ background: var(--warn) }
@@ -188,7 +187,6 @@
           <button class="btn" data-theme="nord" title="Nord" style="padding:0;width:22px;height:22px;border-radius:6px;background:#2e3440;border-color:#3b4252"></button>
           <button class="btn" data-theme="hacker" title="Hacker" style="padding:0;width:22px;height:22px;border-radius:6px;background:#050;border-color:#113311"></button>
         </div>
-        <button id="zenBtn" class="btn" title="Zen Mode (Alt+Z)">🧘 Zen</button>
       </div>
     </div>
 
@@ -200,7 +198,7 @@
       </div>
       <select id="groupFilter" class="select">
         <option value="">Tất cả nhóm</option>
-        <option>React</option><option>Tailwind</option><option>Python</option><option>C#</option><option>Java</option><option>Go</option><option>Web</option><option>Tools</option><option>Favorites</option>
+        <option>React</option><option>Tailwind</option><option>Python</option><option>C#</option><option>Java</option><option>Go</option><option>Web</option><option>Tools</option><option>Cloud & DevOps</option><option>Favorites</option>
       </select>
       <select id="typeFilter" class="select">
         <option value="">Mọi loại</option>
@@ -212,6 +210,8 @@
         <option value="spec">Spec</option>
         <option value="api">API</option>
         <option value="guide">Guide</option>
+        <option value="cloud">Cloud</option>
+        <option value="ci-cd">CI/CD</option>
       </select>
       <button id="expandAll" class="btn">Mở tất cả</button>
       <button id="collapseAll" class="btn">Thu gọn</button>
@@ -221,10 +221,12 @@
       <label class="btn"><input id="importJson" type="file" accept="application/json" class="hidden">Import JSON</label>
       <button id="exportNotes" class="btn">Export Notes</button>
       <label class="btn"><input id="importNotes" type="file" accept="application/json" class="hidden">Import Notes</label>
-      <span class="chip">Phím tắt: <kbd>/</kbd> tìm • <kbd>⌘/Ctrl</kbd>+<kbd>K</kbd> Command • <kbd>Shift</kbd>+<kbd>O</kbd> Preview • <kbd>Alt</kbd>+<kbd>Z</kbd> Zen</span>
+      <span class="chip">Phím tắt: <kbd>/</kbd> tìm • <kbd>⌘/Ctrl</kbd>+<kbd>K</kbd> Command • <kbd>Shift</kbd>+<kbd>O</kbd> Preview • <kbd>Ctrl</kbd>+<kbd>Z</kbd> Zen</span>
     </div>
   </div>
 </header>
+
+<button id="zenBtn" class="btn" title="Zen Mode (Ctrl+Z)">🧘</button>
 
 <div class="app container">
   <!-- SIDEBAR -->
@@ -424,6 +426,18 @@
       {t:"Rollup – Docs", url:"https://rollupjs.org/introduction/", lang:"EN", type:"guide", desc:"Bundler and build.", tags:["rollup","bundler"]},
       {t:"Vite – Guide", url:"https://vitejs.dev/guide/", lang:"EN", type:"guide", desc:"Next-gen frontend tooling.", tags:["vite","build"]},
     ]},
+    { name: "Cloud & DevOps", icon: "☁️", subtitle: "Hạ tầng, CI/CD, IaC", items: [
+      {t:"Docker – Docs", url:"https://docs.docker.com", lang:"EN", type:"tool", desc:"Containerization platform.", tags:["docker","containers"]},
+      {t:"Kubernetes – Docs", url:"https://kubernetes.io/docs", lang:"EN", type:"tool", desc:"Container orchestration.", tags:["k8s","orchestration"]},
+      {t:"Terraform – Docs", url:"https://developer.hashicorp.com/terraform/docs", lang:"EN", type:"tool", desc:"Infrastructure as Code.", tags:["terraform","iac"]},
+      {t:"Ansible – Docs", url:"https://docs.ansible.com", lang:"EN", type:"tool", desc:"Automation engine.", tags:["ansible","automation"]},
+      {t:"AWS – Docs", url:"https://docs.aws.amazon.com", lang:"EN", type:"cloud", desc:"Amazon Web Services docs.", tags:["aws","cloud"]},
+      {t:"Azure – Docs", url:"https://learn.microsoft.com/en-us/azure", lang:"EN", type:"cloud", desc:"Microsoft Azure docs.", tags:["azure","cloud"]},
+      {t:"Google Cloud – Docs", url:"https://cloud.google.com/docs", lang:"EN", type:"cloud", desc:"Google Cloud docs.", tags:["gcp","cloud"]},
+      {t:"GitHub Actions – Docs", url:"https://docs.github.com/en/actions", lang:"EN", type:"ci-cd", desc:"CI/CD on GitHub.", tags:["actions","ci"]},
+      {t:"GitLab CI/CD – Docs", url:"https://docs.gitlab.com/ee/ci", lang:"EN", type:"ci-cd", desc:"GitLab CI/CD pipeline.", tags:["gitlab","ci"]},
+      {t:"Jenkins – Docs", url:"https://www.jenkins.io/doc", lang:"EN", type:"ci-cd", desc:"Automation server.", tags:["jenkins","ci"]},
+    ]},
   ]};
 
   /* ===== STATE ===== */
@@ -449,7 +463,6 @@
       const b = document.createElement('button');
       b.className="group-btn"; b.innerHTML = `<span>${g.icon||"📦"}</span><span>${g.name}</span>`;
       b.addEventListener('click', ()=>{
-        // scroll to group in main
         const el = document.querySelector(`[data-group-index="${idx}"]`);
         if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); highlight(el); }
       });
@@ -472,7 +485,6 @@
         <span class="chip">${group.items.filter(i=>i.lang==="VI").length>0?"EN+VI":"EN"}</span>`;
       det.appendChild(sum);
 
-      // accordion body (animated)
       const acc = document.createElement('div'); acc.className="accordion";
       const links = document.createElement('div'); links.className="links";
 
@@ -492,10 +504,7 @@
         star.addEventListener('click', (e)=>{ e.stopPropagation(); toggleFavorite(item.url, star); });
 
         const favico = document.createElement('img'); favico.className="favico";
-        try{
-          const u = new URL(item.url);
-          favico.src = `https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`;
-        }catch{ favico.src=""; }
+        try{ const u = new URL(item.url); favico.src = `https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`; }catch{ favico.src=""; }
 
         const a = document.createElement('a'); a.href=item.url; a.target="_blank";
         a.textContent = item.t + (item.lang ? ` (${item.lang})` : "");
@@ -514,8 +523,14 @@
       });
 
       acc.appendChild(links); det.appendChild(acc);
-      // close others on open, save open state
-      det.addEventListener('toggle', ()=>{ saveOpenGroups(); });
+      det.addEventListener('toggle', ()=>{
+        const b = det.querySelector('.accordion');
+        if (b) {
+          if (det.open) { b.style.maxHeight = '800px'; b.style.opacity = '1'; }
+          else { b.style.maxHeight = '0px'; b.style.opacity = '0'; }
+        }
+        saveOpenGroups();
+      });
 
       frag.appendChild(det);
     });
@@ -553,7 +568,14 @@
   function openInPreview(url){ previewFrame.classList.remove('hidden'); spinner.style.display='flex'; previewFrame.src=url; }
   previewFrame.addEventListener('load', ()=> spinner.style.display='none');
   previewToggleEl.addEventListener('change', ()=>{ state.openInPreview = previewToggleEl.checked; if(!state.openInPreview) previewFrame.classList.add('hidden'); });
-  document.addEventListener('keydown',(e)=>{ if (e.shiftKey && (e.key === 'O' || e.key === 'o')){ previewToggleEl.checked = !previewToggleEl.checked; previewToggleEl.dispatchEvent(new Event('change')); } });
+  // Fix Shift+O detection
+  document.addEventListener('keydown',(e)=>{
+    if (e.shiftKey && e.key.toLowerCase()==='o'){
+      e.preventDefault();
+      previewToggleEl.checked = !previewToggleEl.checked;
+      previewToggleEl.dispatchEvent(new Event('change'));
+    }
+  });
 
   /* ===== NOTES ===== */
   function setCurrentNoteLink(url, title){ state.currentLink=url; noteLink.textContent = title || url || "—"; noteArea.value = (state.notes[url] || ""); }
@@ -576,9 +598,12 @@
     Array.from(groupsRoot.querySelectorAll('details.group')).forEach(d=>{
       const body = d.querySelector('.accordion');
       const any = Array.from(d.querySelectorAll('.item')).some(x => x.style.display !== 'none');
-      d.open = any; d.classList.toggle('hidden', !any);
-      body.style.maxHeight = d.open ? '800px' : '0px';
-      body.style.opacity  = d.open ? '1' : '0';
+      d.classList.toggle('hidden', !any);
+      // Giữ nguyên trạng thái mở/tắt của người dùng
+      if (body) {
+        if (d.open) { body.style.maxHeight = '800px'; body.style.opacity = '1'; }
+        else { body.style.maxHeight = '0px'; body.style.opacity = '0'; }
+      }
     });
   }
   searchInput.addEventListener('input', applyFilters);
@@ -588,7 +613,18 @@
 
   /* ===== EXPAND/COLLAPSE ===== */
   expandAllBtn.addEventListener('click', ()=>{ document.querySelectorAll('details.group').forEach(d=>{ d.open=true; const b=d.querySelector('.accordion'); if(b){b.style.maxHeight='800px'; b.style.opacity='1';} }); saveOpenGroups(); });
-  collapseAllBtn.addEventListener('click', ()=>{ document.querySelectorAll('details.group').forEach(d=>{ d.open=false; const b=d.querySelector('.accordion'); if(b){b.style.maxHeight='0px'; b.style.opacity='0';} }); saveOpenGroups(); });
+  collapseAllBtn.addEventListener('click', ()=>{
+    document.querySelectorAll('details.group').forEach(d=>{
+      d.open = false;
+      const b = d.querySelector('.accordion');
+      if (b) {
+        // reset inline styles để không “lock” height khi mở lại thủ công
+        b.style.maxHeight = '';
+        b.style.opacity = '';
+      }
+    });
+    saveOpenGroups();
+  });
 
   /* ===== EXPORT/IMPORT ===== */
   printBtn.addEventListener('click', ()=> window.print());
@@ -631,11 +667,19 @@
   window.addEventListener('beforeunload', ()=> localStorage.setItem(SCROLL_KEY, String(window.scrollY)));
   window.addEventListener('load', ()=>{ const y=parseInt(localStorage.getItem(SCROLL_KEY)||"0",10); if(!isNaN(y)) window.scrollTo(0,y); });
 
-  /* ===== ZEN MODE (toggle + hotkey + persistent) ===== */
-  function applyZen(){ const zen = localStorage.getItem(ZEN_KEY)==='1'; document.body.classList.toggle('zen', zen); zenBtn.textContent = zen ? "✖️ Exit Zen" : "🧘 Zen"; }
+  /* ===== ZEN MODE (Ctrl+Z; ignore when editing) ===== */
+  function applyZen(){ const zen = localStorage.getItem(ZEN_KEY)==='1'; document.body.classList.toggle('zen', zen); zenBtn.textContent = zen ? "✖" : "🧘"; zenBtn.title = zen ? "Exit Zen (Ctrl+Z)" : "Zen Mode (Ctrl+Z)"; }
   applyZen();
-  zenBtn.addEventListener('click', ()=>{ const zen = !(localStorage.getItem(ZEN_KEY)==='1'); localStorage.setItem(ZEN_KEY, zen?'1':'0'); applyZen(); });
-  document.addEventListener('keydown', (e)=>{ if(e.altKey && (e.key==='z' || e.key==='Z')){ const zen = !(localStorage.getItem(ZEN_KEY)==='1'); localStorage.setItem(ZEN_KEY, zen?'1':'0'); applyZen(); } });
+  function toggleZen(){ const zen = !(localStorage.getItem(ZEN_KEY)==='1'); localStorage.setItem(ZEN_KEY, zen?'1':'0'); applyZen(); }
+  zenBtn.addEventListener('click', toggleZen);
+  document.addEventListener('keydown', (e)=>{
+    const tag = (document.activeElement && document.activeElement.tagName || "").toLowerCase();
+    const editing = tag==='input' || tag==='textarea' || document.activeElement.isContentEditable;
+    // Ctrl+Z toggles zen only if not editing (tránh xung đột undo)
+    if (!editing && e.ctrlKey && !e.shiftKey && e.key.toLowerCase()==='z'){
+      e.preventDefault(); toggleZen();
+    }
+  });
 
   /* ===== COMMAND PALETTE (⌘/Ctrl + K) ===== */
   function openCmd(){ cmdp.style.display='flex'; cmdpInput.value=''; buildCmdList(''); cmdpInput.focus(); }
@@ -644,7 +688,6 @@
     cmdpList.innerHTML="";
     const items = [];
     state.data.groups.forEach(g=> g.items.forEach(i=> items.push({g:g.name, ...i})));
-    const norm = (s)=> (s||'').toLowerCase();
     const filtered = q ? items.filter(x=>`${x.g} ${x.t} ${x.tags}`.toLowerCase().includes(q.toLowerCase())) : items.slice(0,200);
     filtered.slice(0,400).forEach(it=>{
       const row=document.createElement('div'); row.className='row';
@@ -678,10 +721,9 @@
 
   /* ====== PWA SERVICE WORKER (inline) ====== */
   if ('serviceWorker' in navigator){
-    // Inline service worker via Blob so vẫn là 1 file HTML tự đủ
     const swCode = `
-      const CACHE = 'devdocs-v3';
-      const ASSETS = ['.']; // cache trang hiện tại
+      const CACHE = 'devdocs-v3-5';
+      const ASSETS = ['.'];
       self.addEventListener('install', e=>{
         e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
         self.skipWaiting();
@@ -692,13 +734,11 @@
       });
       self.addEventListener('fetch', e=>{
         const url = new URL(e.request.url);
-        // Network-first cho docs online; cache-first cho chính app
         if (url.origin === location.origin){
           e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request).then(resp=>{
             const clone = resp.clone(); caches.open(CACHE).then(c=>c.put(e.request, clone)); return resp;
           }).catch(()=> caches.match('.'))));
         } else {
-          // pass-through cho tài nguyên ngoài (docs, favicon)
           e.respondWith(fetch(e.request).catch(()=> new Response('Offline', {status:503,statusText:'Offline'})));
         }
       });
@@ -707,85 +747,6 @@
     const swUrl = URL.createObjectURL(blob);
     navigator.serviceWorker.register(swUrl);
   }
-
-  /* ====== EPUB EXPORT (minimal ZIP store) ======
-     Tạo EPUB đơn giản: 1 chapter chứa toàn bộ link theo nhóm.
-     ZIP "store" (no compression) — đủ để nhiều reader mở.
-  */
-  function crc32(buf){ // CRC-32 tiny impl
-    let c=~0>>>0; for(let i=0;i<buf.length;i++){ c=c^(buf[i]); for(let k=0;k<8;k++){ c = (c>>>1) ^ (0xEDB88320 & (-(c&1))); } } return (~c)>>>0;
-  }
-  function str2u8(s){ return new TextEncoder().encode(s); }
-  function num32le(n){ const b=new Uint8Array(4); const dv=new DataView(b.buffer); dv.setUint32(0,n,true); return b; }
-  function num16le(n){ const b=new Uint8Array(2); const dv=new DataView(b.buffer); dv.setUint16(0,n,true); return b; }
-  function zipStore(files){ // files: [{name, data(Uint8Array), uncompressed:true}]
-    const fileRecords=[]; const chunks=[];
-    let offset=0;
-    for(const f of files){
-      const data = f.data;
-      const crc = crc32(data);
-      const nameU8 = str2u8(f.name);
-      // Local file header
-      const LFH = [
-        num32le(0x04034b50), num16le(20), num16le(0), num16le(0), num16le(0), num16le(0),
-        num32le(crc), num32le(data.length), num32le(data.length), num16le(nameU8.length), num16le(0)
-      ];
-      const head = concatU8(...LFH, nameU8);
-      chunks.push(head, data);
-      const headerOffset = offset; offset += head.length + data.length;
-      fileRecords.push({nameU8, crc, size:data.length, offset:headerOffset});
-    }
-    // Central Directory
-    const cdChunks=[]; let cdSize=0;
-    for(const fr of fileRecords){
-      const CDFH = [
-        num32le(0x02014b50), num16le(20), num16le(20), num16le(0), num16le(0), num16le(0), num16le(0),
-        num32le(fr.crc), num32le(fr.size), num32le(fr.size), num16le(fr.nameU8.length), num16le(0), num16le(0),
-        num16le(0), num16le(0), num32le(0), num32le(fr.offset)
-      ];
-      const rec = concatU8(...CDFH, fr.nameU8);
-      cdChunks.push(rec); cdSize += rec.length;
-    }
-    const cdStart = offset;
-    const cd = concatU8(...cdChunks); chunks.push(cd); offset += cd.length;
-    const EOCD = concatU8(
-      num32le(0x06054b50), num16le(0), num16le(0), num16le(fileRecords.length), num16le(fileRecords.length),
-      num32le(cdSize), num32le(cdStart), num16le(0)
-    );
-    chunks.push(EOCD);
-    return new Blob([concatU8(...chunks)], {type:'application/epub+zip'});
-  }
-  function concatU8(...arrs){ let total=0; arrs.forEach(a=> total+=a.length); const out=new Uint8Array(total); let off=0; arrs.forEach(a=>{ out.set(a,off); off+=a.length; }); return out; }
-
-  // Export EPUB button (add to toolbar automatically)
-  const epubBtn = document.createElement('button'); epubBtn.className='btn'; epubBtn.textContent='Export EPUB';
-  document.getElementById('toolbar').appendChild(epubBtn);
-  epubBtn.addEventListener('click', ()=>{
-    // Build simple EPUB content
-    const title = 'DevDocs Portal Links';
-    const listHTML = state.data.groups.map(g=>{
-      const items = g.items.map(i=>`<li><a href="${i.url}">${escapeHtml(i.t)}</a> — ${i.type}${i.lang? ' · '+i.lang:''}</li>`).join('');
-      return `<h2>${escapeHtml(g.name)} — <small>${escapeHtml(g.subtitle||'')}</small></h2><ul>${items}</ul>`;
-    }).join('\n');
-
-    const containerXml = `<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n  <rootfiles>\n    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n  </rootfiles>\n</container>`;
-    const navXhtml = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8"/><title>Nav</title></head><body><nav epub:type="toc"><ol><li><a href="chapter.xhtml">DevDocs</a></li></ol></nav></body></html>`;
-    const chapter = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8"/><title>${escapeHtml(title)}</title></head><body><h1>${escapeHtml(title)}</h1>${listHTML}</body></html>`;
-    const opf = `<?xml version="1.0" encoding="utf-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="3.0">\n  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">\n    <dc:identifier id="BookId">devdocs-portal-v3</dc:identifier>\n    <dc:title>${escapeXml(title)}</dc:title>\n    <dc:language>en</dc:language>\n  </metadata>\n  <manifest>\n    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>\n    <item id="chap" href="chapter.xhtml" media-type="application/xhtml+xml"/>\n  </manifest>\n  <spine>\n    <itemref idref="chap"/>\n  </spine>\n</package>`;
-
-    const files = [
-      {name:'mimetype', data:str2u8('application/epub+zip')}, // must be first, uncompressed
-      {name:'META-INF/container.xml', data:str2u8(containerXml)},
-      {name:'OEBPS/nav.xhtml', data:str2u8(navXhtml)},
-      {name:'OEBPS/chapter.xhtml', data:str2u8(chapter)},
-      {name:'OEBPS/content.opf', data:str2u8(opf)},
-    ];
-    const blob = zipStore(files);
-    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='DevDocs_Portal.epub'; a.click(); URL.revokeObjectURL(a.href);
-  });
-
-  function escapeHtml(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function escapeXml(s){ return escapeHtml(s); }
 
 })();
 </script>
